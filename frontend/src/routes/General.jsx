@@ -1,23 +1,22 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import RouteMapper from "../helper/RouteMapper";
-import Layout from "../layout/Layout";
+import RouteLayout from "../helper/RouteLayout";
 import { generalRoutes } from "./routesdata/general-routes";
 
 const General = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          {generalRoutes?.map((route, index) => (
+        {generalRoutes?.map((route, index) => {
+          return (
             <Route
-              path={route.path}
-              element={route.component}
               exact={route.exact}
+              element={<RouteLayout route={route} />}
+              path={route.path}
               key={index}
             />
-          ))}
-        </Route>
+          );
+        })}
       </Routes>
     </>
   );

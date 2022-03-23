@@ -1,5 +1,4 @@
 import React from "react";
-import Component from "./Component";
 import General from "./General";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -8,7 +7,6 @@ const Routing = () => {
     <>
       <Router>
         <General />
-        <Component />
       </Router>
     </>
   );
