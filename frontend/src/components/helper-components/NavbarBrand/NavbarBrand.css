@@ -1,0 +1,18 @@
+.navbar-brand-logo {
+  display: flex;
+}
+
+.navbar-brand-logo a {
+  line-height: 2rem;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: var(--font-size-md);
+}
+
+.navbar-brand-logo svg {
+  margin-right: 0.3rem;
+}
+.navbar-brand-logo span {
+  color: var(--blue-primary-clr);
+}

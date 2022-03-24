@@ -1,0 +1,59 @@
+.input-container {
+  margin-bottom: 0.8rem;
+  height: 4.7rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input-group {
+  display: flex;
+  flex-direction: column;
+  transition: border 0.2s ease-in-out;
+  position: relative;
+  flex: 1;
+}
+
+.form-input-field {
+  border: 1px solid #c9c7c7;
+  background: none;
+  width: 100%;
+  border-radius: var(--border-small-radius);
+  outline: none;
+  flex: 0.8;
+  height: 100%;
+  transition: border 0.2s ease-in-out;
+  font-size: var(--font-size-xs);
+  padding-left: 0.6rem;
+}
+.form-input-field:focus ~ .form-label {
+  color: var(--blue-primary-clr);
+}
+
+.form-input-field:hover {
+  border: 1px solid var(--blue-primary-clr);
+}
+
+.form-input-field:focus {
+  border: 1px solid var(--blue-primary-clr);
+}
+
+.form-label {
+  font-size: var(--font-size-xs);
+  color: var(--font-clr-body);
+  font-weight: 300;
+  position: absolute;
+  left: 0.6rem;
+  top: 0;
+}
+
+.input-span {
+  color: var(--red-primary-clr);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  flex: 0.2;
+  display: none;
+}
+
+.form-input-field:invalid[focused="true"] ~ .input-span {
+  display: block;
+}

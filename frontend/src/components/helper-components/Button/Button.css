@@ -1,0 +1,23 @@
+.btn-form {
+  width: max-content;
+  padding: 0.8rem 1rem;
+  color: var(--white-primary);
+  outline: none;
+  border: none;
+}
+.register,
+.login {
+  background-color: var(--blue-primary-clr);
+  border: none;
+  border-radius: var(--border-small-radius);
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.register:hover,
+.login:hover {
+  background-color: var(--blue-secondary-clr);
+}
