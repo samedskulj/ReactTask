@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { singlequestion } from "../../data/singlequestion";
 import { Container, Row, Col } from "react-bootstrap";
 import { Card, SiteInfo } from "../helper-components";
-
+import { comments } from "../../data/comments";
+import { Comments } from "../index";
 import "./QuestionSection.css";
-const QuestionSection = ({ content }) => {
+
+const QuestionSection = () => {
+  const [commentSection, setCommentSection] = useState(comments);
+
   return (
     <>
       <Container className="py-5">
@@ -16,6 +20,9 @@ const QuestionSection = ({ content }) => {
             <SiteInfo />
           </Col>
         </Row>
+        {commentSection?.map((comment) => (
+          <Comments key={comment.id} comment={comment} />
+        ))}
       </Container>
     </>
   );

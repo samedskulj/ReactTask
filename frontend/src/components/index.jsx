@@ -5,6 +5,7 @@ import TabContent from "./TabContent/TabContent";
 import TopUsers from "./TopUsers/TopUsers";
 import MyQuestionsSection from "./MyQuestionsSection/MyQuestionsSection";
 import QuestionSection from "./QuestionSection/QuestionSection";
+import Comments from "./Comments/Comments";
 export {
   Navbar,
   Tabs,
@@ -13,4 +14,5 @@ export {
   TopUsers,
   MyQuestionsSection,
   QuestionSection,
+  Comments,
 };

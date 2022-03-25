@@ -13,6 +13,7 @@ const Form = ({ formType, textButton }) => {
     email: "",
     password: "",
     confirmPassword: "",
+    commentTextArea: "",
   });
 
   const handleChange = (e) => {
