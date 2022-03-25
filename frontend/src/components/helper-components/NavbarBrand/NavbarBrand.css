@@ -3,13 +3,17 @@
 }
 
 .navbar-brand-logo a {
+  text-decoration: none;
+  color: inherit;
   line-height: 2rem;
   display: flex;
   align-items: center;
   font-weight: 700;
   font-size: var(--font-size-md);
 }
-
+.navbar-brand-logo a:hover {
+  color: inherit;
+}
 .navbar-brand-logo svg {
   margin-right: 0.3rem;
 }

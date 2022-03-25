@@ -1,4 +1,5 @@
 import Navbar from "./Navbar/Navbar";
-import Sidebar from "./Sidebar/Sidebar";
 import FormWrapper from "./FormWrapper/FormWrapper";
-export { Navbar, Sidebar, FormWrapper };
+import Tabs from "./Tabs/Tabs";
+import TabContent from "./TabContent/TabContent";
+export { Navbar, Tabs, TabContent, FormWrapper };

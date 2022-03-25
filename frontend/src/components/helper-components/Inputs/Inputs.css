@@ -22,8 +22,9 @@
   flex: 0.8;
   height: 100%;
   transition: border 0.2s ease-in-out;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   padding-left: 0.6rem;
+  padding-top: 1rem;
 }
 .form-input-field:focus ~ .form-label {
   color: var(--blue-primary-clr);
@@ -38,12 +39,12 @@
 }
 
 .form-label {
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   color: var(--font-clr-body);
   font-weight: 300;
   position: absolute;
   left: 0.6rem;
-  top: 0;
+  top: 0.2rem;
 }
 
 .input-span {
