@@ -1,0 +1,18 @@
+.top-users {
+  position: sticky;
+  top: 0.8rem;
+}
+.top-users__section {
+  background-color: var(--white-primary);
+  box-shadow: var(--container-box-shadow);
+  padding: 1.1rem;
+
+  margin-top: 3.1rem;
+}
+
+.top-users__section h2 {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--font-clr-heading);
+  margin-bottom: 0.5rem;
+}

@@ -1,0 +1,41 @@
+.top-users__list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.top-users__list p {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--font-clr-body);
+  margin-bottom: 0;
+}
+.top-users__info {
+  display: flex;
+  align-items: center;
+}
+
+.top-users__info img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.5rem;
+  border-radius: 99%;
+}
+
+#top-users__name {
+  color: var(--blue-primary-clr);
+}
+.top-users__score {
+  display: flex;
+  align-items: center;
+}
+
+.top-users__score p {
+  margin: 0;
+  margin-right: 0.4rem;
+}
+
+.top-users__score svg {
+  fill: var(--blue-primary-clr);
+}

@@ -8,6 +8,7 @@ const Tabs = () => {
   const [activeTab, setActiveTab] = useState(tabsData[0]);
 
   const handleTabClick = (tab) => {
+    window.scrollTo(0, 0);
     setActiveTab(tabsData[tab]);
   };
 

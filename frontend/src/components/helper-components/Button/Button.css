@@ -6,7 +6,8 @@
   border: none;
 }
 .register,
-.login {
+.login,
+.add-question {
   background-color: var(--blue-primary-clr);
   border: none;
   border-radius: var(--border-small-radius);
@@ -18,6 +19,7 @@
 }
 
 .register:hover,
-.login:hover {
-  background-color: var(--blue-secondary-clr);
+.login:hover,
+.add-question:hover {
+  background-color: var(--blue-secondary-clr-dark);
 }

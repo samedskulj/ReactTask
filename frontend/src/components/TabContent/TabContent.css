@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: 10% 1fr;
   margin-bottom: 3.1rem;
+  border-radius: var(--border-small-radius);
 }
 
 .card-grid__thumbs {
@@ -16,6 +17,7 @@
   margin: 0;
   padding: 0.4rem 0;
 }
+
 .card-grid__thumbs svg {
   font-size: var(--icon-size-normal);
   cursor: pointer;
@@ -51,4 +53,15 @@
   margin: 0;
   font-size: var(--font-size-xs);
   font-style: italic;
+}
+
+.card-grid__comments {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.card-grid__comments p {
+  margin: 0 0 0 0.4rem;
+  font-size: var(--font-size-xs);
 }
