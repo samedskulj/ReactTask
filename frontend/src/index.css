@@ -6,7 +6,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+/* Beacuse of the Bootsrap !important has to be used */
 a {
   text-decoration: none;
   color: inherit;
@@ -14,8 +14,16 @@ a {
 
 li {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
-/* Beacuse of the Bootsrap !important has to be used */
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   margin: 0;
   font-family: "Source Serif Pro", serif !important;
@@ -30,7 +38,7 @@ body {
   --font-size-lg: 2rem;
   --blue-primary-clr: #3d5bf1;
   --red-primary-clr: #dd3d55;
-  --blue-secondary-clr: #8290d4;
+  --blue-secondary-clr: #d2d7f3;
   --bg-clr: #e9e9e9;
   --icon-size-large: 1.5rem;
   --icon-size-normal: 1.5rem;
