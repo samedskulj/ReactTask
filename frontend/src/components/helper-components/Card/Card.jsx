@@ -7,6 +7,7 @@ import {
 import { Link } from "react-router-dom";
 import { DefaultIMG } from "../../../images";
 import "./Card.css";
+
 const Card = ({ content }) => {
   return (
     <>

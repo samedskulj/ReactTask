@@ -1,7 +1,11 @@
 import React from "react";
-
+import { QuestionSection } from "../../components";
 const Question = () => {
-  return <div>Question</div>;
+  return (
+    <div>
+      <QuestionSection />
+    </div>
+  );
 };
 
 export default Question;
