@@ -1,7 +1,8 @@
 import React from "react";
+import { MyQuestionsSection } from "../../components";
 
 const MyQuestions = () => {
-  return <div>MyQuestions</div>;
+  return <MyQuestionsSection />;
 };
 
 export default MyQuestions;

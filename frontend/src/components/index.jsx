@@ -3,4 +3,5 @@ import FormWrapper from "./FormWrapper/FormWrapper";
 import Tabs from "./Tabs/Tabs";
 import TabContent from "./TabContent/TabContent";
 import TopUsers from "./TopUsers/TopUsers";
-export { Navbar, Tabs, TabContent, FormWrapper, TopUsers };
+import MyQuestionsSection from "./MyQuestionsSection/MyQuestionsSection";
+export { Navbar, Tabs, TabContent, FormWrapper, TopUsers, MyQuestionsSection };
