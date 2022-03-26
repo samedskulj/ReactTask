@@ -1,10 +1,14 @@
 import React from "react";
 import "./MultiButton.css";
 
-const MultiButton = ({ type, roleClass, children }) => {
+const MultiButton = ({ type, roleClass, children, clickFunction }) => {
   return (
     <>
-      <button className={`btn-form ${roleClass}`} type={type}>
+      <button
+        className={`btn-form ${roleClass}`}
+        onClick={clickFunction && clickFunction}
+        type={type}
+      >
         {children}
       </button>
     </>

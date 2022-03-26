@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { tabContent } from "../../data/tabContent";
-
 import "./TabContent.css";
 import { Card } from "../helper-components";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllQuestions } from "../../redux/redux-thunk/allQuestionsState";
 
 const TabContent = ({ tabCategory }) => {
-  const tabContentData = tabContent.findIndex(
-    (tab) => tab.category === tabCategory
+  const dispatch = useDispatch();
+  const tabContentData = useSelector(
+    (state) => state.allQuestions.allQuestions
   );
+
+  useEffect(() => {
+    dispatch(getAllQuestions());
+  }, [dispatch]);
+
+  console.log(tabContentData);
+
   return (
     <>
       {tabContent[tabContentData]?.content?.map((content) => {

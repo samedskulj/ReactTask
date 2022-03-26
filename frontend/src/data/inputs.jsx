@@ -52,3 +52,18 @@ export const commentTextArea = {
   type: "textarea",
   required: true,
 };
+
+export const askQuestion = [
+  {
+    id: 1,
+    name: "title",
+    label: "Title",
+    type: "text",
+  },
+  {
+    id: 2,
+    name: "question",
+    label: "Question",
+    type: "text",
+  },
+];

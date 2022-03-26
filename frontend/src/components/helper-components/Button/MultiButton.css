@@ -9,7 +9,8 @@
 .register,
 .login,
 .add-question,
-.comment {
+.comment,
+.ask-question {
   background-color: var(--blue-primary-clr);
   border: none;
   border-radius: var(--border-small-radius);
@@ -20,13 +21,15 @@
   transition: background-color 0.2s ease-in-out;
 }
 
-.comment {
+.comment,
+.ask-question {
   width: max-content;
 }
 
 .register:hover,
 .login:hover,
 .add-question:hover,
-.comment:hover {
+.comment:hover,
+.ask-question:hover {
   background-color: var(--blue-secondary-clr-dark);
 }
