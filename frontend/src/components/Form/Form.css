@@ -1,0 +1,12 @@
+.form-firebase__error {
+  text-align: center;
+  background-color: var(--red-primary-clr);
+  border-radius: var(--border-small-radius);
+  width: 100%;
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0.3rem;
+  color: var(--white-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}

@@ -1,14 +1,14 @@
 import React from "react";
-import "./Button.css";
+import "./MultiButton.css";
 
-const Button = ({ type, roleClass, text }) => {
+const MultiButton = ({ type, roleClass, children }) => {
   return (
     <>
       <button className={`btn-form ${roleClass}`} type={type}>
-        {text}
+        {children}
       </button>
     </>
   );
 };
 
-export default Button;
+export default MultiButton;

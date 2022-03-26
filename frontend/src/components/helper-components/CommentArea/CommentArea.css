@@ -1,0 +1,5 @@
+.comment-area {
+  background-color: var(--white-primary);
+  box-shadow: var(--container-box-shadow);
+  padding: 0.9rem;
+}

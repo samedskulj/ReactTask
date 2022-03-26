@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { singlequestion } from "../../data/singlequestion";
 import { Container, Row, Col } from "react-bootstrap";
-import { Card, SiteInfo } from "../helper-components";
+import { Card, SiteInfo, CommentArea } from "../helper-components";
 import { comments } from "../../data/comments";
 import { Comments } from "../index";
+
 import "./QuestionSection.css";
 
 const QuestionSection = () => {
@@ -16,10 +17,13 @@ const QuestionSection = () => {
           <Col lg="8" md="12">
             <Card content={singlequestion} />
           </Col>
-          <Col lg="4">
+          <Col lg="4" className="question-mobile-none">
             <SiteInfo />
           </Col>
         </Row>
+        <Col lg="8 mb-5">
+          <CommentArea />
+        </Col>
         {commentSection?.map((comment) => (
           <Comments key={comment.id} comment={comment} />
         ))}

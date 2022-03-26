@@ -19,7 +19,7 @@ const FormWrapper = ({
           <p>{subheading}</p>
           <Link to={linkType}>{linkText}</Link>
         </div>
-        <Form formType={typeOfForm} textButton={buttonLabel} />
+        <Form formType={typeOfForm} />
       </div>
     </section>
   );

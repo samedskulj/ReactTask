@@ -10,7 +10,6 @@ const Register = () => {
         linkType="/login"
         linkText="Sign in"
         typeOfForm="register"
-        buttonLabel="Register"
       />
     </>
   );

@@ -4,10 +4,12 @@
   color: var(--white-primary);
   outline: none;
   border: none;
+  text-transform: uppercase;
 }
 .register,
 .login,
-.add-question {
+.add-question,
+.comment {
   background-color: var(--blue-primary-clr);
   border: none;
   border-radius: var(--border-small-radius);
@@ -18,8 +20,13 @@
   transition: background-color 0.2s ease-in-out;
 }
 
+.comment {
+  width: max-content;
+}
+
 .register:hover,
 .login:hover,
-.add-question:hover {
+.add-question:hover,
+.comment:hover {
   background-color: var(--blue-secondary-clr-dark);
 }

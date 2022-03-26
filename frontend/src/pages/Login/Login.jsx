@@ -1,5 +1,6 @@
 import React from "react";
 import { FormWrapper } from "../../components";
+
 const Login = () => {
   return (
     <>
@@ -9,7 +10,6 @@ const Login = () => {
         linkType="/register"
         linkText="Sign up"
         typeOfForm="login"
-        buttonLabel="Login"
       />
     </>
   );
