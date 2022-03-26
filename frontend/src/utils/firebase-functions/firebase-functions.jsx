@@ -49,15 +49,28 @@ export const addQuestion = async (formData) => {
   }
 };
 
+let dataFetched = false;
+
 export const getQuestions = () => {
-  var questions = [];
-  onSnapshot(collection(firebaseDatabase, "questions"), (querySnapshot) => {
-    querySnapshot.docs.forEach((doc) => {
-      if (doc.data() !== null) {
-        questions.push(doc.data());
+  let questions = [];
+  return new Promise((resolve, reject) => {
+    onSnapshot(collection(firebaseDatabase, "questions"), (querySnapshot) => {
+      querySnapshot.docs.forEach((doc) => {
+        if (doc.data() !== null) {
+          questions.push(doc.data());
+        }
+      });
+
+      if (!dataFetched) {
+        // data was fetched first time, return all questions
+        const questions = querySnapshot.docs.map((q) => ({
+          id: q.id,
+          ...q.data(),
+        }));
+        resolve(questions);
+        dataFetched = true;
+      } else {
       }
-      console.log(doc.data());
     });
   });
-  return questions;
 };
