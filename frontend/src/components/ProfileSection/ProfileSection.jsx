@@ -1,34 +1,26 @@
-import React, { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 import { Row, Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../redux/redux-thunk/userState";
-import { ProfileData, ProfileForm } from "../helper-components";
 import { authFirebase } from "../../utils/firebase-config";
+import { ProfileData, ProfileForm } from "../helper-components";
+import Loader from "../helper-components/Loader/Loader";
 import "./ProfileSection.css";
 
 const ProfileSection = () => {
-  const [account, setAccount] = useState([]);
   const user = useSelector((state) => state.user.user);
-  useEffect(() => {
-    onAuthStateChanged(authFirebase, (user) => {
-      if (user) {
-        dispatch(getUser(user.email));
-        setAccount(user);
-      }
-    });
-  }, [user]);
-
-  console.log(account);
-
+  console.log(user);
   return (
     <>
-      {account && (
+      {user == null ? (
+        <Loader />
+      ) : (
         <Container className="py-5">
           <div className="profile-section">
             <Row>
-              <ProfileData user={account[0]} />
-              <ProfileForm user={account[0]} />
+              <ProfileData user={user} />
+              <ProfileForm user={user} />
             </Row>
           </div>
         </Container>

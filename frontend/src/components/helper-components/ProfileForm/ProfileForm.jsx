@@ -4,49 +4,54 @@ import { updateProfileInputs } from "../../../data/inputs";
 import Inputs from "../Inputs/Inputs";
 import { usePrevious } from "../../../hooks/usePrevious";
 import MultiButton from "../Button/MultiButton";
+import { convertArray } from "../../../helper/convertArray";
 
 const ProfileForm = ({ user }) => {
+  const object = convertArray(user);
+
   const handleUpdate = () => {};
   const [changed, setChanged] = useState(false);
-
-  const initialState = {};
-  if (user) {
-    initialState.firstName = user.firstName;
-    initialState.email = user.email;
-    initialState.lastName = user.lastName;
-  }
-
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(object);
 
   //made a new custom hook to check if the data has been changed
 
-  const previousData = usePrevious(formData);
+  const previousData = usePrevious(object);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   useEffect(() => {
-    if (previousData !== formData) {
+    if (JSON.stringify(previousData) === JSON.stringify(formData)) {
+      setChanged(false);
+    } else {
       setChanged(true);
     }
-  }, [formData, previousData]);
+  }, [formData, changed]);
 
   return (
     <>
-      <Col lg="8">
-        <h2>Account Settings</h2>
-        <form onSubmit={handleUpdate}>
-          {updateProfileInputs.map((input) => (
-            <Col lg="12" key={input.id}>
-              <Inputs key={input.id} {...input} value={formData[input.name]} />
-            </Col>
-          ))}
-          <MultiButton
-            roleClass="update"
-            disabled={changed === true}
-            type="submit"
-          >
-            Update
-          </MultiButton>
-        </form>
-      </Col>
+      {user !== null && (
+        <Col lg="8">
+          <h2>Account Settings</h2>
+          <form onSubmit={handleUpdate}>
+            {updateProfileInputs.map((input) => (
+              <Col lg="12" key={input.id}>
+                <Inputs
+                  key={input.id}
+                  {...input}
+                  value={formData[input.name]}
+                  handleChange={handleChange}
+                />
+              </Col>
+            ))}
+            <MultiButton roleClass="update" disabled={changed} type="submit">
+              Update
+            </MultiButton>
+          </form>
+        </Col>
+      )}
     </>
   );
 };

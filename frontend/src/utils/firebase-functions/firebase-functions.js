@@ -7,10 +7,13 @@ import {
   query,
   where,
   getDoc,
+  doc,
+  updateDoc,
 } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import {
   firebaseDatabase,
@@ -18,7 +21,6 @@ import {
   questionsCollections,
   usersCollections,
 } from "../firebase-config";
-import { useSelector } from "react-redux";
 
 export const registerUser = async (formData) => {
   try {
@@ -38,11 +40,10 @@ export const registerUser = async (formData) => {
       lastName: formData.lastName ? formData.lastName : `LastName`,
     });
 
-    return new Promise((resolve, reject) => {
-      resolve({ ...response.user });
-    });
+    const registered = await response;
+    return registered.user;
   } catch (error) {
-    return error.message;
+    return error.code;
   }
 };
 
@@ -69,22 +70,24 @@ export const loginUser = async (formData) => {
       formData.email,
       formData.password
     );
-    return success;
+    const loggedIn = await success;
+    return success.user;
   } catch (error) {
     return error.message;
   }
 };
 
-export const addQuestion = async (formData, user) => {
+export const addQuestion = async (formData) => {
   try {
     const success = await addDoc(collection(firebaseDatabase, "questions"), {
       title: formData.title,
       question: formData.title,
-      username: user,
+      nameOfUser: formData.nameOfUser,
+      userID: formData.userID,
       numberOfLikes: 0,
       numberOfComments: 0,
     });
-    return success;
+    return true;
   } catch (error) {
     return error.message;
   }
@@ -94,26 +97,62 @@ export const getHot = async () => {
   const q = query(questionsCollections, orderBy("thumbs", "desc"), limit(10));
   const docSnap = await getDocs(q);
   const hotQuestions = [];
-  return new Promise((resolve, reject) => {
-    docSnap.forEach((doc) => {
-      hotQuestions.push({
-        category: "Hot Questions",
-        ...doc.data(),
-        id: doc.id,
-      });
-      resolve(hotQuestions);
+
+  const responses = docSnap.forEach((doc) => {
+    hotQuestions.push({
+      category: "Hot Questions",
+      ...doc.data(),
+      id: doc.id,
     });
   });
+
+  const hot = await hotQuestions;
+  return hot;
 };
 
 export const getTopUsers = async () => {
   const q = query(questionsCollections, orderBy("thumbs", "desc"), limit(10));
   const docSnap = await getDocs(q);
-  const hotQuestions = [];
-  return new Promise((resolve, reject) => {
-    docSnap.forEach((doc) => {
-      hotQuestions.push({ ...doc.data(), id: doc.id });
-      resolve(hotQuestions);
-    });
+  const topUsers = [];
+  const response = docSnap.forEach((doc) => {
+    topUsers.push({ ...doc.data(), id: doc.id });
   });
+
+  const responseUsers = await topUsers;
+  return responseUsers;
+};
+
+export const changeProfileData = async (formData) => {
+  const { email, firstName, lastName } = formData;
+  const currentUser = authFirebase.currentUser;
+  try {
+    await updateProfile(authFirebase, {
+      email: email,
+    });
+    const updatedUserDocument = doc(usersCollections, currentUser.email);
+    await updateDoc(updatedUserDocument, {
+      email: formData.email,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+    });
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const addComment = async (formData) => {
+  try {
+    const success = await addDoc(
+      collection(firebaseDatabase, "questions", formData.id, "answers"),
+      {
+        answer: formData.answer,
+        nameOfUser: formData.firstName,
+        userID: formData.userID,
+      }
+    );
+    return true;
+  } catch (error) {
+    return error.message;
+  }
 };

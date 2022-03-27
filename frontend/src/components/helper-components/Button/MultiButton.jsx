@@ -8,10 +8,13 @@ const MultiButton = ({
   clickFunction,
   disabled,
 }) => {
+  console.log(disabled);
   return (
     <>
       <button
-        className={`btn-form ${roleClass}`}
+        className={`btn-form ${roleClass} ${
+          disabled === true ? "disabled" : ""
+        }`}
         onClick={clickFunction && clickFunction}
         type={type}
         disabled={disabled}
