@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Card, SiteInfo, CommentArea } from "../helper-components";
 import { comments } from "../../data/comments";
 import { Comments } from "../index";
-import AuthComponent from "../../helper/AuthComponent";
+import AuthorizedComponent from "../../helper/UnauthorizedComponent";
 
 import "./QuestionSection.css";
 
@@ -22,11 +22,11 @@ const QuestionSection = () => {
             <SiteInfo />
           </Col>
         </Row>
-        <AuthComponent>
+        <AuthorizedComponent>
           <Col lg="8 mb-5">
             <CommentArea />
           </Col>
-        </AuthComponent>
+        </AuthorizedComponent>
         {commentSection?.map((comment) => (
           <Comments key={comment.id} comment={comment} />
         ))}

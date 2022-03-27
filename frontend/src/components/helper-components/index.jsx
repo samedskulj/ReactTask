@@ -7,6 +7,7 @@ import UsersList from "./UsersList/UsersList";
 import Card from "./Card/Card";
 import SiteInfo from "./SiteInfo/SiteInfo";
 import CommentArea from "./CommentArea/CommentArea";
+import ProfileIcon from "./ProfileIcon/ProfileIcon";
 export {
   HeaderWrapper,
   MultiButton,
@@ -17,4 +18,5 @@ export {
   Card,
   SiteInfo,
   CommentArea,
+  ProfileIcon,
 };

@@ -1,0 +1,21 @@
+.profile-icon {
+  position: relative;
+}
+
+.profile-icon__image {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 99%;
+  border: 2px solid var(--blue-secondary-clr-dark);
+  overflow: hidden;
+  box-shadow: var(--container-box-shadow);
+}
+
+.profile-icon__image img {
+  width: 100%;
+  display: block;
+  height: 100%;
+}
+
+.profile-icon__dropdown {
+}

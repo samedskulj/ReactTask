@@ -3,6 +3,9 @@ import "./NavbarList.css";
 import { NavLink } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { GrClose } from "react-icons/gr";
+import AuthComponent from "../../../helper/UnauthorizedComponent";
+import { ProfileIcon } from "../index";
+
 const NavbarList = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,23 +32,30 @@ const NavbarList = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : undefined)}
-            to="/register"
-            title="Register"
-          >
-            Register
-          </NavLink>
+          <ProfileIcon />
         </li>
-        <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : undefined)}
-            to="/login"
-            title="Login"
-          >
-            Login
-          </NavLink>
-        </li>
+        <AuthComponent>
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+              to="/register"
+              title="Register"
+            >
+              Register
+            </NavLink>
+          </li>
+        </AuthComponent>
+        <AuthComponent>
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+              to="/login"
+              title="Login"
+            >
+              Login
+            </NavLink>
+          </li>
+        </AuthComponent>
       </ul>
       <button
         className="navbar--hamburger-menu"
