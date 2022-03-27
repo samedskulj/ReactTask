@@ -5,6 +5,14 @@
   outline: none;
   border: none;
   text-transform: uppercase;
+  background-color: var(--blue-primary-clr);
+  border: none;
+  border-radius: var(--border-small-radius);
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease-in-out;
 }
 .register,
 .login,

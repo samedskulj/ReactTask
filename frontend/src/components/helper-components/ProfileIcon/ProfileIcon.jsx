@@ -5,22 +5,27 @@ import MultiButton from "../Button/MultiButton";
 import "./ProfileIcon.css";
 
 const ProfileIcon = () => {
-  const handleClick = () => {};
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
       <div className="profile-icon">
-        <div className="profile-icon__image">
+        <button className="profile-icon__image" onClick={handleClick}>
           <img src={DefaultIMG} />
-        </div>
-        <div className="profile-icon__dropdown">
-          <Link to="/">Profile</Link>
-          <div className="profile-icon__footer">
-            <MultiButton roleClass="sign-out" clickFunction={handleClick}>
-              Sign Out
-            </MultiButton>
+        </button>
+        {isOpen && (
+          <div className="profile-icon__dropdown">
+            <Link to="/">Profile</Link>
+            <div className="profile-icon__footer">
+              <MultiButton roleClass="sign-out" clickFunction={handleClick}>
+                Sign Out
+              </MultiButton>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );
