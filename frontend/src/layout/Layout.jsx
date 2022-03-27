@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
         dispatch(getUser(user.email));
       }
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

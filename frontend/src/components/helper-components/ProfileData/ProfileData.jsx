@@ -4,9 +4,7 @@ import { Col } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { DefaultIMG } from "../../../images";
 import MultiButton from "../Button/MultiButton";
-const ProfileData = () => {
-  const user = useSelector((state) => state.user.user);
-
+const ProfileData = ({ user }) => {
   return (
     <>
       <Col lg="4">

@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { updateProfileInputs } from "../../../data/inputs";
 import Inputs from "../Inputs/Inputs";
-import { useSelector } from "react-redux";
 import { usePrevious } from "../../../hooks/usePrevious";
 import MultiButton from "../Button/MultiButton";
 
-const ProfileForm = () => {
+const ProfileForm = ({ user }) => {
   const handleUpdate = () => {};
-
-  const user = useSelector((state) => state.user.user);
-
   const [changed, setChanged] = useState(false);
 
-  const [formData, setFormData] = useState({
-    firstName: user.firstName ? user.firstName : "",
-    lastName: user.lastName ? user.lastName : "",
-    email: user.email ? user.email : "",
-  });
-
-  if (user !== null) {
+  const initialState = {};
+  if (user) {
+    initialState.firstName = user.firstName;
+    initialState.email = user.email;
+    initialState.lastName = user.lastName;
   }
+
+  const [formData, setFormData] = useState(initialState);
 
   //made a new custom hook to check if the data has been changed
 
