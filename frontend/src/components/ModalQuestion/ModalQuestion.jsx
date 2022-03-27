@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { askQuestion } from "../../data/inputs";
 import { Inputs, MultiButton } from "../helper-components";
-import useForm from "../../hooks/useForm";
+import useFirebase from "../../hooks/useFirebase";
 
 const ModalQuestion = ({ show, setShow }) => {
   const [inputs, setInputs] = useState(askQuestion);
@@ -12,10 +12,8 @@ const ModalQuestion = ({ show, setShow }) => {
     title: "",
   };
 
-  const { errors, formData, handleChange, handleSubmit, clearData } = useForm(
-    "addQuestion",
-    initialObject
-  );
+  const { errors, formData, handleChange, handleSubmit, clearData } =
+    useFirebase("addQuestion", initialObject);
 
   const handleClose = () => {
     clearData();

@@ -4,8 +4,11 @@ import "./MyQuestionsSection.css";
 import { myquestions } from "../../data/myquestions";
 import { Card } from "../helper-components";
 import "./MyQuestionsSection.css";
+import { useSelector } from "react-redux";
 
 const MyQuestionsSection = () => {
+  const user = useSelector((state) => state.user.user);
+  console.log(user);
   return (
     <Container>
       <Row>

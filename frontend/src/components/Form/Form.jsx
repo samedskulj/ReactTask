@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MultiButton, Inputs } from "../helper-components";
 import { registerInputs, loginInputs } from "../../data/inputs";
-import useForm from "../../hooks/useForm";
+import useFirebase from "../../hooks/useFirebase";
 import "./Form.css";
 
 const Form = ({ formType }) => {
@@ -17,7 +17,7 @@ const Form = ({ formType }) => {
     confirmPassword: "",
   };
 
-  const { errors, formData, handleChange, handleSubmit } = useForm(
+  const { errors, formData, handleChange, handleSubmit } = useFirebase(
     formType,
     initialObject
   );

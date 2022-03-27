@@ -1,13 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getQuestions } from "../../utils/firebase-functions/firebase-functions";
-
-export const getAllQuestions = createAsyncThunk(
-  "allQuestions/getAllQuestions",
-  async () => {
-    const response = await getQuestions();
-    return response;
-  }
-);
 
 export const allQuestionsSlice = createSlice({
   name: "allQuestions",
@@ -16,21 +7,27 @@ export const allQuestionsSlice = createSlice({
     loading: false,
     error: null,
   },
-  extraReducers: {
-    [getAllQuestions.pending]: (state) => {
+  reducers: {
+    getAllQuestionsFetch: (state) => {
       state.loading = true;
       state.error = null;
     },
-    [getAllQuestions.fulfilled]: (state, action) => {
+    getAllQuestionsSuccess: (state, action) => {
       state.allQuestions = action.payload;
       state.loading = false;
       state.error = null;
     },
-    [getAllQuestions.rejected]: (state, action) => {
+    getAllQuestionsRejected: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
   },
 });
+
+export const {
+  getAllQuestionsFetch,
+  getAllQuestionsRejected,
+  getAllQuestionsSuccess,
+} = allQuestionsSlice.actions;
 
 export default allQuestionsSlice.reducer;

@@ -15,7 +15,7 @@ const Card = ({ content }) => {
         <div className="card-grid" key={content.id}>
           <div className="card-grid__thumbs">
             <AiOutlineArrowUp />
-            <p>{content.numberOfLikes}</p>
+            <p>{content.thumbs}</p>
             <AiOutlineArrowDown />
           </div>
           <div className="card-grid__main">

@@ -3,25 +3,34 @@ import { tabContent } from "../../data/tabContent";
 import "./TabContent.css";
 import { Card } from "../helper-components";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllQuestions } from "../../redux/redux-thunk/allQuestionsState";
-
+import { getHotQuestions } from "../../redux/redux-thunk/hotQuestionState";
+import { RealTimeQuestions } from "../index";
 const TabContent = ({ tabCategory }) => {
   const dispatch = useDispatch();
-  const tabContentData = useSelector(
-    (state) => state.allQuestions.allQuestions
-  );
+  const allQuestions = useSelector((state) => state.allQuestions.allQuestions);
+  const hotQuestions = useSelector((state) => state.hotQuestions.hotQuestions);
 
   useEffect(() => {
-    dispatch(getAllQuestions());
+    dispatch(getHotQuestions());
   }, [dispatch]);
-
-  console.log(tabContentData);
 
   return (
     <>
-      {tabContent[tabContentData]?.content?.map((content) => {
-        return <Card content={content} key={content.id} />;
-      })}
+      {tabCategory === "Hot Questions" ? (
+        <>
+          {hotQuestions.map((content) => {
+            return <Card content={content} key={content.id} />;
+          })}
+        </>
+      ) : (
+        <>
+          <RealTimeQuestions>
+            {allQuestions.map((content) => {
+              return <Card content={content} key={content.id} />;
+            })}
+          </RealTimeQuestions>
+        </>
+      )}
     </>
   );
 };

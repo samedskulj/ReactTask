@@ -5,13 +5,21 @@ import {
   addQuestion,
 } from "../utils/firebase-functions/firebase-functions";
 import { formValidation } from "../helper/FormValidation";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../redux/redux-thunk/userState";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
-const useForm = (formType, initialObject) => {
+const useFirebase = (formType, initialObject) => {
+  const navigate = useNavigate();
   const [isSubmit, setIsSubmit] = useState(false);
   const [formData, setFormData] = useState(initialObject);
-  const [response, setResponse] = useState();
+  const [response, setResponse] = useState(false);
   const [errors, setErrors] = useState({});
+  const [setCookie, removeCookie] = useCookies(["firebaseUser"]);
+  const user = useSelector((state) => state.user.user);
 
+  const dispatch = useDispatch();
   const confirmAction = async () => {
     if (Object.keys(errors).length === 0 && isSubmit) {
       handleFirebase();
@@ -29,15 +37,18 @@ const useForm = (formType, initialObject) => {
 
   const handleFirebase = async () => {
     switch (formType) {
-      case "registerUser":
+      case "register":
         const registerResponse = await registerUser(formData);
         if (typeof registerResponse !== "string") {
+          dispatch(getUser(registerResponse.email));
+          clearData();
+          navigate("/");
         } else {
           setErrors({ ...errors, credentials: registerResponse });
           setFormData(initialObject);
         }
         break;
-      case "loginUser":
+      case "login":
         const loginResponse = await loginUser(formData);
         if (typeof loginResponse !== "string") {
         } else {
@@ -46,9 +57,10 @@ const useForm = (formType, initialObject) => {
         }
         break;
       case "addQuestion":
-        const addQuestionResponse = await addQuestion(formData);
+        const addQuestionResponse = await addQuestion(formData, "Samed");
         console.log(addQuestionResponse);
         if (typeof addQuestionResponse !== "string") {
+          setResponse(true);
         } else {
           setErrors({ ...errors, credentials: addQuestionResponse });
           setFormData(initialObject);
@@ -73,7 +85,6 @@ const useForm = (formType, initialObject) => {
     errors,
     handleChange,
     handleSubmit,
-    response,
     setFormData,
     setErrors,
     setIsSubmit,
@@ -81,4 +92,4 @@ const useForm = (formType, initialObject) => {
   };
 };
 
-export default useForm;
+export default useFirebase;
