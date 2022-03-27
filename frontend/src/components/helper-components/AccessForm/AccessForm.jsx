@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { MultiButton, Inputs } from "../helper-components";
-import { registerInputs, loginInputs } from "../../data/inputs";
-import useFirebase from "../../hooks/useFirebase";
-import "./Form.css";
+import { MultiButton, Inputs } from "..";
+import { registerInputs, loginInputs } from "../../../data/inputs";
+import useFirebase from "../../../hooks/useFirebase";
+import "./AccessForm.css";
 
 const Form = ({ formType }) => {
   const [inputs, setInputs] = useState(

@@ -7,6 +7,8 @@ import MyQuestionsSection from "./MyQuestionsSection/MyQuestionsSection";
 import QuestionSection from "./QuestionSection/QuestionSection";
 import Comments from "./Comments/Comments";
 import RealTimeQuestions from "./RealTimeQuestions/RealTimeQuestions";
+import ProfileSection from "./ProfileSection/ProfileSection";
+
 export {
   Navbar,
   Tabs,
@@ -17,4 +19,5 @@ export {
   QuestionSection,
   Comments,
   RealTimeQuestions,
+  ProfileSection,
 };

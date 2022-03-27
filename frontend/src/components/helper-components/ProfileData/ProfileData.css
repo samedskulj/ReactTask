@@ -1,0 +1,17 @@
+.profile-data__image {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-data__image img {
+  width: 8rem;
+  height: 8rem;
+  display: block;
+  border-radius: 99%;
+  overflow: hidden;
+}
+
+.profile-data__info {
+  text-align: center;
+  margin-top: 1rem;
+}

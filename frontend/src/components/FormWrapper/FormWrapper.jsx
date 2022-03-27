@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Form from "../Form/Form";
+import { AccessForm } from "../helper-components";
 import "./FormWrapper.css";
 
 const FormWrapper = ({
@@ -9,7 +9,6 @@ const FormWrapper = ({
   linkType,
   linkText,
   typeOfForm,
-  buttonLabel,
 }) => {
   return (
     <section className="form-wrapper">
@@ -19,7 +18,7 @@ const FormWrapper = ({
           <p>{subheading}</p>
           <Link to={linkType}>{linkText}</Link>
         </div>
-        <Form formType={typeOfForm} />
+        <AccessForm formType={typeOfForm} />
       </div>
     </section>
   );

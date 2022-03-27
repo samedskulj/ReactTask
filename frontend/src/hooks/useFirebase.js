@@ -58,7 +58,6 @@ const useFirebase = (formType, initialObject) => {
         break;
       case "addQuestion":
         const addQuestionResponse = await addQuestion(formData, "Samed");
-        console.log(addQuestionResponse);
         if (typeof addQuestionResponse !== "string") {
           setResponse(true);
         } else {

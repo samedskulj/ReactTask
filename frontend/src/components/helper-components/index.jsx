@@ -8,6 +8,10 @@ import Card from "./Card/Card";
 import SiteInfo from "./SiteInfo/SiteInfo";
 import CommentArea from "./CommentArea/CommentArea";
 import ProfileIcon from "./ProfileIcon/ProfileIcon";
+import ProfileData from "./ProfileData/ProfileData";
+import AccessForm from "./AccessForm/AccessForm";
+import ProfileForm from "./ProfileForm/ProfileForm";
+
 export {
   HeaderWrapper,
   MultiButton,
@@ -19,4 +23,7 @@ export {
   SiteInfo,
   CommentArea,
   ProfileIcon,
+  ProfileData,
+  AccessForm,
+  ProfileForm,
 };

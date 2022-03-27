@@ -44,6 +44,16 @@ export const formValidation = (formData, formType) => {
         errors.title = "Title must be at least 10 characters";
       }
       break;
+    case "updateProfile":
+      if (!formData.firstName) {
+        errors.firstName = "First name is required";
+      }
+      if (!formData.lastName) {
+        errors.lastName = "Last name is required";
+      }
+      if (!formData.email) {
+        errors.email = "Email is required";
+      }
   }
 
   return errors;

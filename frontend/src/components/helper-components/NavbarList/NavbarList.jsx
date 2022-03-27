@@ -3,8 +3,9 @@ import "./NavbarList.css";
 import { NavLink } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { GrClose } from "react-icons/gr";
-import AuthComponent from "../../../helper/UnauthorizedComponent";
+import UnauthorizedComponent from "../../../helper/UnauthorizedComponent";
 import { ProfileIcon } from "../index";
+import AuthorizedComponent from "../../../helper/AuthorizedComponent";
 
 const NavbarList = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,10 +32,8 @@ const NavbarList = () => {
             MyQuestions
           </NavLink>
         </li>
-        <li>
-          <ProfileIcon />
-        </li>
-        <AuthComponent>
+
+        <UnauthorizedComponent>
           <li>
             <NavLink
               className={({ isActive }) => (isActive ? "active" : undefined)}
@@ -44,8 +43,8 @@ const NavbarList = () => {
               Register
             </NavLink>
           </li>
-        </AuthComponent>
-        <AuthComponent>
+        </UnauthorizedComponent>
+        <UnauthorizedComponent>
           <li>
             <NavLink
               className={({ isActive }) => (isActive ? "active" : undefined)}
@@ -55,8 +54,11 @@ const NavbarList = () => {
               Login
             </NavLink>
           </li>
-        </AuthComponent>
+        </UnauthorizedComponent>
       </ul>
+      <AuthorizedComponent>
+        <ProfileIcon />
+      </AuthorizedComponent>
       <button
         className="navbar--hamburger-menu"
         onClick={() => setIsOpen(!isOpen)}

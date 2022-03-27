@@ -4,6 +4,9 @@
   height: 100%;
   padding: 0;
   margin: 0;
+  flex: 1;
+  justify-content: flex-end;
+  margin-right: 2rem;
 }
 
 .navbar-ul li {
@@ -55,6 +58,7 @@
     right: -100%;
     top: 0;
     transition: all 0.3s ease;
+    margin-right: 0;
   }
   .navbar-ul li {
     display: none;

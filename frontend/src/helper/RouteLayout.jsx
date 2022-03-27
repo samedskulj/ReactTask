@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../layout/Layout";
 import RequireAuth from "./RequireAuth";
-
 const RouteLayout = ({ route }) => {
   if (route.auth && route.layout) {
     return (

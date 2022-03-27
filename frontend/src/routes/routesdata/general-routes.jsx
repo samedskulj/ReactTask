@@ -31,6 +31,7 @@ export const generalRoutes = [
     exact: true,
     component: <Profile />,
     layout: true,
+    auth: true,
   },
   {
     path: "/register",

@@ -6,23 +6,28 @@ import "./ProfileIcon.css";
 
 const ProfileIcon = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
 
   return (
     <>
-      <div className="profile-icon">
-        <button className="profile-icon__image" onClick={handleClick}>
+      <div
+        className="profile-icon"
+        onClick={() => setIsOpen(!isOpen)}
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) {
+            setIsOpen(false);
+          }
+        }}
+      >
+        <button className="profile-icon__image">
           <img src={DefaultIMG} />
         </button>
         {isOpen && (
           <div className="profile-icon__dropdown">
-            <Link to="/">Profile</Link>
+            <Link onClick={() => setIsOpen(false)} to="/profile">
+              Profile
+            </Link>
             <div className="profile-icon__footer">
-              <MultiButton roleClass="sign-out" clickFunction={handleClick}>
-                Sign Out
-              </MultiButton>
+              <MultiButton roleClass="sign-out">Sign Out</MultiButton>
             </div>
           </div>
         )}

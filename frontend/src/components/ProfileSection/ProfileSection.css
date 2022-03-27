@@ -1,0 +1,5 @@
+.profile-section {
+  background-color: var(--white-primary);
+  box-shadow: var(--container-box-shadow);
+  padding: 3rem;
+}

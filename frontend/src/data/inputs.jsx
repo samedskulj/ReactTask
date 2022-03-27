@@ -67,3 +67,24 @@ export const askQuestion = [
     type: "text",
   },
 ];
+
+export const updateProfileInputs = [
+  {
+    id: 1,
+    name: "firstName",
+    label: "First Name",
+    type: "text",
+  },
+  {
+    id: 2,
+    name: "lastName",
+    label: "Last Name",
+    type: "text",
+  },
+  {
+    id: 3,
+    name: "email",
+    label: "Email",
+    type: "email",
+  },
+];
