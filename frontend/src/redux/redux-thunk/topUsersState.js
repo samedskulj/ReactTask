@@ -9,7 +9,7 @@ export const getTopUsersFirebase = createAsyncThunk(
   }
 );
 
-export const singleQuestionSlice = createSlice({
+export const topUsersSlice = createSlice({
   name: "topUsers",
   initialState: {
     topUsers: [],
@@ -33,4 +33,4 @@ export const singleQuestionSlice = createSlice({
   },
 });
 
-export default singleQuestionSlice.reducer;
+export default topUsersSlice.reducer;

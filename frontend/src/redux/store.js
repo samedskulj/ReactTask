@@ -5,6 +5,7 @@ import {
   userState,
   singleQuestionState,
   topUsersState,
+  usersQuestionsState,
 } from "./redux-thunk";
 
 const store = configureStore({
@@ -14,6 +15,7 @@ const store = configureStore({
     user: userState,
     singleQuestion: singleQuestionState,
     topUsers: topUsersState,
+    usersQuestions: usersQuestionsState,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

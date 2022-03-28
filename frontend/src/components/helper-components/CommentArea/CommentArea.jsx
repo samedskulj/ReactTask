@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addAnswerFirebase } from "../../../redux/redux-thunk/singleQuestionState";
 
 const CommentArea = () => {
-  const [commentArea, setCommentArea] = useState("");
   const [input, setInput] = useState(commentTextArea);
   const dispatch = useDispatch();
 
@@ -19,6 +18,7 @@ const CommentArea = () => {
 
   const user = useSelector((state) => state.user);
   const { singleQuestion } = useSelector((state) => state.singleQuestion);
+
   const dispatchAnswer = () => {
     const data = {
       answer: formData.commentTextArea,
@@ -26,8 +26,10 @@ const CommentArea = () => {
       nameOfUser: user.user[0].firstName,
       id: singleQuestion.id,
     };
-    console.log(data);
-    dispatch(addAnswerFirebase(data));
+    if (singleQuestion.id !== undefined && user.user.length !== 0) {
+      dispatch(addAnswerFirebase(data));
+      clearData();
+    }
   };
 
   const { errors, formData, handleChange, handleSubmit, clearData } =
@@ -37,9 +39,11 @@ const CommentArea = () => {
     <div className="comment-area">
       <form onSubmit={handleSubmit}>
         <div className="comment-area__credentials">
-          <p>
-            Comment as <Link to={"/profile"}>Samke</Link>
-          </p>
+          {user !== null && (
+            <p>
+              Comment as <Link to={"/profile"}>{user.user[0].firstName}</Link>{" "}
+            </p>
+          )}
           <Inputs
             {...input}
             value={formData[input.name]}

@@ -10,6 +10,7 @@ import {
   doc,
   updateDoc,
   setDoc,
+  increment,
 } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
@@ -23,6 +24,11 @@ import {
   usersCollections,
 } from "../firebase-config";
 
+const currentUser = authFirebase.currentUser;
+
+//One place for all of the firebase functions
+
+//formData is an object, not an array. The function for registering the user, and adding the user to the database
 export const registerUser = async (formData) => {
   try {
     const response = await createUserWithEmailAndPassword(
@@ -30,7 +36,6 @@ export const registerUser = async (formData) => {
       formData.email,
       formData.password
     );
-    //Adding users to database so that we are able to get data easier and add more data
     const userDb = await addDoc(usersCollections, {
       email: response.user.email,
       token: response.user.accessToken,
@@ -48,7 +53,7 @@ export const registerUser = async (formData) => {
     return error.code;
   }
 };
-
+//getUserFromDatabase is a function that gets the user from the database
 export const getUserFromDatabase = async (email) => {
   try {
     const q = query(usersCollections, where("email", "==", email));
@@ -64,7 +69,7 @@ export const getUserFromDatabase = async (email) => {
     return error.message;
   }
 };
-
+//loginUser is a function that logs the user in
 export const loginUser = async (formData) => {
   try {
     const success = await signInWithEmailAndPassword(
@@ -78,7 +83,7 @@ export const loginUser = async (formData) => {
     return error.message;
   }
 };
-
+//addQuestion is a function that adds a question to the database
 export const addQuestion = async (formData) => {
   try {
     const success = await addDoc(collection(firebaseDatabase, "questions"), {
@@ -94,7 +99,7 @@ export const addQuestion = async (formData) => {
     return error.message;
   }
 };
-
+//getHot is a function that gets the hot questions from the database using the orderBy function, and query from the Firestore (firebase npm package)
 export const getHot = async () => {
   const q = query(questionsCollections, orderBy("thumbs", "desc"), limit(10));
   const docSnap = await getDocs(q);
@@ -111,7 +116,7 @@ export const getHot = async () => {
   const hot = await hotQuestions;
   return hot;
 };
-
+// getTopUsers is a function that gets the top users from the database
 export const getTopUsers = async () => {
   const q = query(
     usersCollections,
@@ -127,10 +132,10 @@ export const getTopUsers = async () => {
   const responseUsers = await topUsers;
   return responseUsers;
 };
-
+// changeProfileData changes the data of the user and then we update the database collection which is holiding the users data
 export const changeProfileData = async (formData) => {
   const { email, firstName, lastName } = formData;
-  const currentUser = authFirebase.currentUser;
+
   try {
     await updateProfile(authFirebase, {
       email: email,
@@ -146,17 +151,39 @@ export const changeProfileData = async (formData) => {
     return error.message;
   }
 };
+//addComment is a function which is used to add a comment to the database
 
 export const addComment = async (formData) => {
   try {
     const success = await addDoc(
       collection(firebaseDatabase, "questions", formData.id, "answers"),
       {
-        answer: "test",
+        answer: formData.answer,
+        nameOfUser: formData.nameOfUser,
+        userID: formData.userID,
       }
     );
+    const updatedUserDocument = doc(usersCollections, formData.userID);
+
+    await updateDoc(updatedUserDocument, {
+      numberOfTimesCommented: increment(1),
+    });
+
     return true;
   } catch (error) {
     return error.message;
   }
+};
+
+//getUsersQuestions is a function to get the users questions from the database
+export const getUsersQuestions = async (userId) => {
+  const q = query(questionsCollections, where("userID", "==", userId));
+  const docSnap = await getDocs(q);
+  const questions = [];
+  const response = docSnap.forEach((doc) => {
+    questions.push({ ...doc.data(), id: doc.id });
+  });
+
+  const responseQuestions = await questions;
+  return responseQuestions;
 };

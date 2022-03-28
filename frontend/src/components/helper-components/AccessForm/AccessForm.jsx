@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MultiButton, Inputs } from "..";
@@ -6,7 +6,7 @@ import { registerInputs, loginInputs } from "../../../data/inputs";
 import useFormValidation from "../../../hooks/useFormValidation";
 import {
   registerUserFirebase,
-  getUser,
+  resetUserData,
   loginUserFirebase,
 } from "../../../redux/redux-thunk/userState";
 import "./AccessForm.css";
@@ -29,25 +29,24 @@ const Form = ({ formType }) => {
     dispatch(loginUserFirebase(formData));
   };
 
-  const checkAuthError = useCallback(() => {
+  const checkAuthError = () => {
     if (typeof user.error === "string") {
       if (user.error.includes("auth/email")) {
         setErrorFirebase("Email already in use");
-      } else if (
-        user.error.includes("auth/password") ||
-        user.error.includes("auth/email-incorrect")
-      ) {
+        dispatch(resetUserData());
+      } else if (user.error.includes("auth/user-not-found")) {
         setErrorFirebase("Password or email incorrect");
+        dispatch(resetUserData());
       } else {
         setErrorFirebase(null);
         navigate("/");
       }
     }
-  }, [user]);
+  };
 
   useEffect(() => {
     checkAuthError();
-  }, [checkAuthError]);
+  }, [user]);
 
   const initialObject = {
     firstName: "",
@@ -63,7 +62,6 @@ const Form = ({ formType }) => {
     formType === "register" ? dispatchRegister : dispatchLogin
   );
 
-  console.log(user);
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -80,7 +78,7 @@ const Form = ({ formType }) => {
           {formType}
         </MultiButton>
       </form>
-      {errorFirebase && (
+      {errorFirebase !== null && (
         <span className="form-firebase__error">{errorFirebase}</span>
       )}
     </>

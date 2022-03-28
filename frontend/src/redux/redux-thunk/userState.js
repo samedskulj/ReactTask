@@ -5,7 +5,6 @@ import {
   registerUser,
   loginUser,
 } from "../../utils/firebase-functions/firebase-functions";
-import { authFirebase } from "../../utils/firebase-config";
 
 export const getUser = createAsyncThunk("user/getUser", async (email) => {
   const response = await getUserFromDatabase(email);
@@ -39,10 +38,18 @@ export const loginUserFirebase = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: {},
+    user: null,
     error: false,
     loading: false,
     updated: false,
+  },
+  reducers: {
+    resetUserData: (state) => {
+      state.user = null;
+      state.error = false;
+      state.loading = false;
+      state.updated = false;
+    },
   },
   extraReducers: {
     [getUser.pending]: (state) => {
@@ -100,9 +107,7 @@ export const userSlice = createSlice({
     [loginUserFirebase.fulfilled]: (state, action) => {
       if (
         typeof action.payload === "string" &&
-        action.payload.includes(
-          "auth/email" || action.payload.includes("auth/password")
-        )
+        action.payload.includes("auth/user-not-found")
       ) {
         state.error = action.payload;
         state.user = null;
@@ -115,10 +120,10 @@ export const userSlice = createSlice({
     },
     [loginUserFirebase.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload;
+      state.error = null;
     },
   },
 });
 
-export const { getUserTest } = userSlice.actions;
+export const { resetUserData } = userSlice.actions;
 export default userSlice.reducer;

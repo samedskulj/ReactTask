@@ -9,9 +9,6 @@ import { addQuestionFirebase } from "../../redux/redux-thunk/allQuestionsState";
 const ModalQuestion = ({ show, setShow }) => {
   const [inputs, setInputs] = useState(askQuestion);
   const dispatch = useDispatch();
-  const [fetched, setFetched] = useState();
-
-  const question = useSelector((state) => state.allQuestions);
 
   const initialObject = {
     question: "",

@@ -50,7 +50,6 @@ export const commentTextArea = {
   id: 1,
   name: "commentTextArea",
   type: "textarea",
-  required: true,
 };
 
 export const askQuestion = [

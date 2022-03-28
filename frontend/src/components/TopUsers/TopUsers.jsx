@@ -14,6 +14,7 @@ const TopUsers = () => {
 
   const handleShow = () => setShow(true);
   const { topUsers } = useSelector((state) => state.topUsers);
+
   useEffect(() => {
     dispatch(getTopUsersFirebase());
   }, [dispatch]);

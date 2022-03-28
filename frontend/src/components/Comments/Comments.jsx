@@ -13,8 +13,8 @@ const Comments = ({ comment }) => {
             <div className="comment-section-grid">
               <img src={DefaultIMG} />
               <div className="comment-section__main">
-                <p id="comment-section__name">{comment.name}</p>
-                <p id="comment-section__comment">{comment.comment}</p>
+                <p id="comment-section__name">{comment.firstName}</p>
+                <p id="comment-section__comment">{comment.answer}</p>
               </div>
             </div>
           </div>
