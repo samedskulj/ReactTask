@@ -11,8 +11,8 @@ export const getUser = createAsyncThunk("user/getUser", async (email) => {
   return response;
 });
 
-export const updateUser = createAsyncThunk(
-  "user/updateUser",
+export const updateUserFirebase = createAsyncThunk(
+  "user/updateUserFirebase",
   async (formData) => {
     const response = await changeProfileData(formData);
     return response;
@@ -65,16 +65,16 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    [updateUser.pending]: (state, action) => {
+    [updateUserFirebase.pending]: (state, action) => {
       state.loading = true;
       state.error = null;
     },
-    [updateUser.fulfilled]: (state, action) => {
+    [updateUserFirebase.fulfilled]: (state, action) => {
       state.loading = false;
       state.updated = action.payload;
       state.error = null;
     },
-    [updateUser.rejected]: (state, action) => {
+    [updateUserFirebase.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

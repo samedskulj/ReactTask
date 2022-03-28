@@ -11,6 +11,7 @@ import {
   updateDoc,
   setDoc,
   increment,
+  deleteDoc,
 } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
@@ -140,7 +141,7 @@ export const changeProfileData = async (formData) => {
     await updateProfile(authFirebase, {
       email: email,
     });
-    const updatedUserDocument = doc(usersCollections, currentUser.email);
+    const updatedUserDocument = doc(usersCollections, formData.id);
     await updateDoc(updatedUserDocument, {
       email: formData.email,
       firstName: formData.firstName,
@@ -168,11 +169,55 @@ export const addComment = async (formData) => {
     const document = doc(questionsCollections, formData.id);
 
     await updateDoc(document, {
-      numberOfComments: increment(1),
+      numberOfComments: increment(-1),
     });
 
     await updateDoc(updatedUserDocument, {
       numberOfTimesCommented: increment(1),
+    });
+
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const editComment = async (formData) => {
+  try {
+    const success = await updateDoc(
+      doc(
+        firebaseDatabase,
+        "questions",
+        formData.id,
+        "answers",
+        formData.commentId
+      ),
+      {
+        answer: formData.answer,
+      }
+    );
+    return true;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+//delete comment
+export const deleteComment = async (formData) => {
+  try {
+    const success = await deleteDoc(
+      doc(
+        firebaseDatabase,
+        "questions",
+        formData.id,
+        "answers",
+        formData.commentId
+      )
+    );
+    const document = doc(questionsCollections, formData.id);
+
+    await updateDoc(document, {
+      numberOfComments: increment(-1),
     });
 
     return true;

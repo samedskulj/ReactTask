@@ -23,16 +23,17 @@ const NavbarList = () => {
             <GrClose />
           </button>
         )}
-        <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? "active" : undefined)}
-            to="/myquestions"
-            title="MyQuestions"
-          >
-            MyQuestions
-          </NavLink>
-        </li>
-
+        <AuthorizedComponent>
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+              to="/myquestions"
+              title="MyQuestions"
+            >
+              MyQuestions
+            </NavLink>
+          </li>
+        </AuthorizedComponent>
         <UnauthorizedComponent>
           <li>
             <NavLink

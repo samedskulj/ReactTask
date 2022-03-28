@@ -60,6 +60,10 @@ export const formValidation = (formData, formType) => {
         errors.commentTextArea = "Comment is required";
       }
       break;
+    case "answer":
+      if (!formData.answer) {
+        errors.answer = "Your answer can't be empty";
+      }
   }
 
   return errors;

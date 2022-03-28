@@ -67,7 +67,7 @@ export const askQuestion = [
   },
 ];
 
-export const updateProfileInputs = [
+export const updateProfile = [
   {
     id: 1,
     name: "firstName",
@@ -87,3 +87,9 @@ export const updateProfileInputs = [
     type: "email",
   },
 ];
+
+export const editAnswer = {
+  id: 1,
+  name: "answer",
+  type: "textarea",
+};

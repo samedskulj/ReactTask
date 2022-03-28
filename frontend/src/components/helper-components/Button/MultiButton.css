@@ -15,7 +15,8 @@
   transition: background-color 0.2s ease-in-out;
 }
 .btn-form.disabled {
-  color: red;
+  background-color: var(--bs-gray-200);
+  pointer-events: none;
 }
 .register,
 .login,
