@@ -19,8 +19,6 @@ const TopUsers = () => {
     dispatch(getTopUsersFirebase());
   }, [dispatch]);
 
-  console.log(topUsers);
-
   return (
     <Col lg="3">
       <div className="top-users">

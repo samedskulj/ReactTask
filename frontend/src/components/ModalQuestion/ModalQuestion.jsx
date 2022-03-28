@@ -14,8 +14,8 @@ const ModalQuestion = ({ show, setShow }) => {
     question: "",
     title: "",
   };
+
   const user = useSelector((state) => state.user);
-  console.log(user.user);
 
   const dispatchAddQuestion = () => {
     const data = {

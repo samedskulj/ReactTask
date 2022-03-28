@@ -34,7 +34,7 @@ const MyQuestionsSection = () => {
               <Alert variant="info">You have no Questions</Alert>
             )}
             {usersQuestions?.map((question) => (
-              <Col lg="6">
+              <Col lg="6" key={question.id}>
                 <Card content={question} />
               </Col>
             ))}

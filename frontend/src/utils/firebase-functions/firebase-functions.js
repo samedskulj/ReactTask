@@ -88,7 +88,7 @@ export const addQuestion = async (formData) => {
   try {
     const success = await addDoc(collection(firebaseDatabase, "questions"), {
       title: formData.title,
-      question: formData.title,
+      question: formData.question,
       nameOfUser: formData.nameOfUser,
       userID: formData.userID,
       numberOfLikes: 0,
@@ -164,6 +164,12 @@ export const addComment = async (formData) => {
       }
     );
     const updatedUserDocument = doc(usersCollections, formData.userID);
+
+    const document = doc(questionsCollections, formData.id);
+
+    await updateDoc(document, {
+      numberOfComments: increment(1),
+    });
 
     await updateDoc(updatedUserDocument, {
       numberOfTimesCommented: increment(1),

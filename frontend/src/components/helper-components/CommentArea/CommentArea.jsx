@@ -53,7 +53,7 @@ const CommentArea = () => {
         </div>
         <div className="comment-area__submit">
           <MultiButton roleClass="comment" type="submit">
-            Submit a comment
+            Submit answer
           </MultiButton>
         </div>
       </form>
