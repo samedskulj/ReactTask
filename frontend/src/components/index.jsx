@@ -8,6 +8,7 @@ import QuestionSection from "./QuestionSection/QuestionSection";
 import Comments from "./Comments/Comments";
 import RealTimeQuestions from "./RealTimeQuestions/RealTimeQuestions";
 import ProfileSection from "./ProfileSection/ProfileSection";
+import RealtimeAnswersQuestion from "./RealtimeAnswersQuestion/RealtimeAnswersQuestion";
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   Comments,
   RealTimeQuestions,
   ProfileSection,
+  RealtimeAnswersQuestion,
 };

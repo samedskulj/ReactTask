@@ -8,7 +8,6 @@ const MultiButton = ({
   clickFunction,
   disabled,
 }) => {
-  console.log(disabled);
   return (
     <>
       <button
@@ -17,7 +16,6 @@ const MultiButton = ({
         }`}
         onClick={clickFunction && clickFunction}
         type={type}
-        disabled={disabled}
       >
         {children}
       </button>

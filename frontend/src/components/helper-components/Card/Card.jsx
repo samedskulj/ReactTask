@@ -12,10 +12,10 @@ const Card = ({ content }) => {
   return (
     <>
       <Link to={`/question/${content.id}`} className="card-grid__link">
-        <div className="card-grid" key={content.id}>
+        <div className="card-grid">
           <div className="card-grid__thumbs">
             <AiOutlineArrowUp />
-            <p>{content.thumbs}</p>
+            <p>{content.numberOfLikes}</p>
             <AiOutlineArrowDown />
           </div>
           <div className="card-grid__main">
@@ -24,7 +24,7 @@ const Card = ({ content }) => {
             <div className="card-grid__footer">
               <div className="card-grid__information">
                 <img src={DefaultIMG} />
-                <p>{content.username}</p>
+                <p>{content.nameOfUser}</p>
               </div>
               <div className="card-grid__comments">
                 <AiOutlineComment />

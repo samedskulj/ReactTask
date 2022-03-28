@@ -9,6 +9,7 @@ import {
   getDoc,
   doc,
   updateDoc,
+  setDoc,
 } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
@@ -143,12 +144,10 @@ export const changeProfileData = async (formData) => {
 
 export const addComment = async (formData) => {
   try {
-    const success = await addDoc(
+    const success = await setDoc(
       collection(firebaseDatabase, "questions", formData.id, "answers"),
       {
-        answer: formData.answer,
-        nameOfUser: formData.firstName,
-        userID: formData.userID,
+        answer: "test",
       }
     );
     return true;

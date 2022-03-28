@@ -54,6 +54,12 @@ export const formValidation = (formData, formType) => {
       if (!formData.email) {
         errors.email = "Email is required";
       }
+      break;
+    case "comment":
+      if (!formData.commentTextArea) {
+        errors.commentTextArea = "Comment is required";
+      }
+      break;
   }
 
   return errors;
