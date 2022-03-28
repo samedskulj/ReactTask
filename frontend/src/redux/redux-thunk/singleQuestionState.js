@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { addQuestion } from "../../utils/firebase-functions/firebase-functions";
+import { addComment } from "../../utils/firebase-functions/firebase-functions";
 
 export const addAnswerFirebase = createAsyncThunk(
   "singleQuestion/addAnswerFirebase",
   async (formData) => {
-    const response = await addQuestion(formData);
+    const response = await addComment(formData);
     return response;
   }
 );

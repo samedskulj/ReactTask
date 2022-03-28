@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MultiButton, UsersList } from "../helper-components";
 import { topusers } from "../../data/topusers";
 import { Col } from "react-bootstrap";
 import "./TopUsers.css";
 import ModalQuestion from "../ModalQuestion/ModalQuestion";
+import { useDispatch, useSelector } from "react-redux";
+import { getTopUsersFirebase } from "../../redux/redux-thunk/topUsersState";
 
 const TopUsers = () => {
   const [users, setUsers] = useState(topusers);
-
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
+  const { topUsers } = useSelector((state) => state.topUsers);
+  useEffect(() => {
+    dispatch(getTopUsersFirebase());
+  }, [dispatch]);
+
+  console.log(topUsers);
 
   return (
     <Col lg="3">

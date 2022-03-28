@@ -39,6 +39,7 @@ export const registerUser = async (formData) => {
         ? formData.firstName
         : `User${response.uid}`,
       lastName: formData.lastName ? formData.lastName : `LastName`,
+      numberOfTimesCommented: 0,
     });
 
     const registered = await response;
@@ -112,7 +113,11 @@ export const getHot = async () => {
 };
 
 export const getTopUsers = async () => {
-  const q = query(questionsCollections, orderBy("thumbs", "desc"), limit(10));
+  const q = query(
+    usersCollections,
+    orderBy("numberOfTimesCommented", "desc"),
+    limit(5)
+  );
   const docSnap = await getDocs(q);
   const topUsers = [];
   const response = docSnap.forEach((doc) => {
@@ -144,7 +149,7 @@ export const changeProfileData = async (formData) => {
 
 export const addComment = async (formData) => {
   try {
-    const success = await setDoc(
+    const success = await addDoc(
       collection(firebaseDatabase, "questions", formData.id, "answers"),
       {
         answer: "test",
