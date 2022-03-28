@@ -81,3 +81,9 @@
   margin: 0 0 0 0.4rem;
   font-size: var(--font-size-xs);
 }
+
+#card-grid__like {
+  z-index: 999;
+  cursor: pointer;
+  border: 2px solid red;
+}

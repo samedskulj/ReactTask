@@ -4,6 +4,8 @@ import {
   changeProfileData,
   registerUser,
   loginUser,
+  signOut,
+  resetPassword,
 } from "../../utils/firebase-functions/firebase-functions";
 
 export const getUser = createAsyncThunk("user/getUser", async (email) => {
@@ -35,6 +37,22 @@ export const loginUserFirebase = createAsyncThunk(
   }
 );
 
+export const resetPasswordFirebase = createAsyncThunk(
+  "user/resetPasswordFirebase",
+  async (formData) => {
+    const response = await resetPassword(formData);
+    return response;
+  }
+);
+
+export const signOutUserFirebase = createAsyncThunk(
+  "user/signOutUserFirebase",
+  async (formData) => {
+    const response = await signOut(formData);
+    return response;
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -42,6 +60,8 @@ export const userSlice = createSlice({
     error: false,
     loading: false,
     updated: false,
+    signout: false,
+    resetpassword: false,
   },
   reducers: {
     resetUserData: (state) => {
@@ -65,6 +85,33 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    [signOutUserFirebase.pending]: (state, action) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [signOutUserFirebase.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.signout = action.payload;
+      state.error = null;
+    },
+    [signOutUserFirebase.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    [resetPasswordFirebase.pending]: (state, action) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [resetPasswordFirebase.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.resetpassword = action.payload;
+      state.error = null;
+    },
+    [resetPasswordFirebase.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     [updateUserFirebase.pending]: (state, action) => {
       state.loading = true;
       state.error = null;

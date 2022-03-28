@@ -8,10 +8,10 @@ const UsersList = ({ user }) => {
       <div className="top-users__list">
         <div className="top-users__info">
           <img src={DefaultIMG} />
-          <p id="top-users__name">{user.name}</p>
+          <p id="top-users__name">{user.firstName}</p>
         </div>
         <div className="top-users__score">
-          <p>{user.numberOfAnswers}</p>
+          <p>{user.numberOfTimesCommented}</p>
           <AiOutlineArrowUp />
         </div>
       </div>

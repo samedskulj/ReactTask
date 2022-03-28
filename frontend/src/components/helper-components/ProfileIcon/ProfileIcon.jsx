@@ -2,11 +2,25 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { DefaultIMG } from "../../../images";
 import MultiButton from "../Button/MultiButton";
+import { useDispatch, useSelector } from "react-redux";
 import "./ProfileIcon.css";
+import {
+  resetUserData,
+  signOutUserFirebase,
+} from "../../../redux/redux-thunk/userState";
 
 const ProfileIcon = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user.user);
 
+  const handleSignOut = () => {
+    dispatch(signOutUserFirebase());
+    dispatch(resetUserData());
+    if (user.length === 0) {
+      window.locatio.reload();
+    }
+  };
   return (
     <>
       <div
@@ -27,7 +41,9 @@ const ProfileIcon = () => {
               Profile
             </Link>
             <div className="profile-icon__footer">
-              <MultiButton roleClass="sign-out">Sign Out</MultiButton>
+              <MultiButton roleClass="sign-out" clickFunction={handleSignOut}>
+                Sign Out
+              </MultiButton>
             </div>
           </div>
         )}

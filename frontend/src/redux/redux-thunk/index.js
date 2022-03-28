@@ -4,6 +4,7 @@ import singleQuestionState from "./singleQuestionState";
 import userState from "./userState";
 import topUsersState from "./topUsersState";
 import usersQuestionsState from "./usersQuestionsState";
+import reactionsState from "./reactionsState";
 export {
   allQuestionsState,
   hotQuestionState,
@@ -11,4 +12,5 @@ export {
   userState,
   topUsersState,
   usersQuestionsState,
+  reactionsState,
 };

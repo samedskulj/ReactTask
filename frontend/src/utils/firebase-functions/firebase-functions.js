@@ -12,10 +12,12 @@ import {
   setDoc,
   increment,
   deleteDoc,
+  Timestamp,
 } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updatePassword,
   updateProfile,
 } from "firebase/auth";
 import {
@@ -24,6 +26,7 @@ import {
   questionsCollections,
   usersCollections,
 } from "../firebase-config";
+import { async } from "@firebase/util";
 
 const currentUser = authFirebase.currentUser;
 
@@ -94,6 +97,7 @@ export const addQuestion = async (formData) => {
       userID: formData.userID,
       numberOfLikes: 0,
       numberOfComments: 0,
+      createdAt: Timestamp.fromDate(new Date()),
     });
     return true;
   } catch (error) {
@@ -102,7 +106,11 @@ export const addQuestion = async (formData) => {
 };
 //getHot is a function that gets the hot questions from the database using the orderBy function, and query from the Firestore (firebase npm package)
 export const getHot = async () => {
-  const q = query(questionsCollections, orderBy("thumbs", "desc"), limit(10));
+  const q = query(
+    questionsCollections,
+    orderBy("numberOfLikes", "desc"),
+    limit(10)
+  );
   const docSnap = await getDocs(q);
   const hotQuestions = [];
 
@@ -181,7 +189,7 @@ export const addComment = async (formData) => {
     return error.message;
   }
 };
-
+//Firebase function used to edit a comment in the question/:id page route
 export const editComment = async (formData) => {
   try {
     const success = await updateDoc(
@@ -237,4 +245,87 @@ export const getUsersQuestions = async (userId) => {
 
   const responseQuestions = await questions;
   return responseQuestions;
+};
+
+//Add like and dislike functionality
+
+export const addLikes = async (formData) => {
+  const { postId, userId, status } = formData;
+
+  try {
+    if (status === 1) {
+      const success = await setDoc(
+        doc(firebaseDatabase, "reactions", `${postId}:${userId}`),
+        {
+          status: 1,
+        }
+      );
+      const document = doc(questionsCollections, formData.id);
+
+      await updateDoc(document, {
+        numberOfComments: increment(1),
+      });
+    } else if (status === undefined) {
+      const success = await deleteDoc(
+        doc(firebaseDatabase, "reactions", `${postId}:${userId}`)
+      );
+      const document = doc(questionsCollections, formData.id);
+
+      await updateDoc(document, {
+        numberOfLikes: increment(-1),
+      });
+    }
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const addDislikes = async (formData) => {
+  const { postId, userId, status } = formData;
+
+  try {
+    if (status === 0) {
+      const success = await setDoc(
+        doc(firebaseDatabase, "reactions", `${postId}:${userId}`),
+        {
+          status: 0,
+        }
+      );
+      const document = doc(questionsCollections, formData.postId);
+
+      await updateDoc(document, {
+        numberOfLikes: increment(-1),
+      });
+    } else if (status === undefined) {
+      const success = await deleteDoc(
+        doc(firebaseDatabase, "reactions", `${postId}:${userId}`)
+      );
+      const document = doc(questionsCollections, formData.postId);
+
+      await updateDoc(document, {
+        numberOfLikes: increment(1),
+      });
+    }
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const resetPassword = async (formData) => {
+  const { password } = formData;
+  try {
+    const response = await updatePassword(authFirebase.currentUser, password);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const signOut = async () => {
+  try {
+    const response = await signOut(authFirebase);
+    return response;
+  } catch (error) {
+    return error.message;
+  }
 };

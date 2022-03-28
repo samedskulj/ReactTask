@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProfileData.css";
 import { Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { DefaultIMG } from "../../../images";
 import MultiButton from "../Button/MultiButton";
 const ProfileData = ({ user }) => {
@@ -12,9 +12,11 @@ const ProfileData = ({ user }) => {
           <img src={DefaultIMG} />
         </div>
         <div className="profile-data__info">
-          <h3>Samed Skulj</h3>
+          <h3>{user[0].firstName}</h3>
         </div>
-        <MultiButton roleClass="change-password">Change Password</MultiButton>
+        <Link to="/resetpassword">
+          <MultiButton roleClass="change-password">Change Password</MultiButton>
+        </Link>
       </Col>
     </>
   );

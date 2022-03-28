@@ -23,7 +23,7 @@ export const allQuestionsSlice = createSlice({
       state.error = null;
     },
     getAllQuestionsSuccess: (state, action) => {
-      state.allQuestions = action.payload;
+      state.allQuestions = [...state.allQuestions, ...action.payload];
       state.loading = false;
       state.error = null;
     },
@@ -35,6 +35,11 @@ export const allQuestionsSlice = createSlice({
       state.loading = false;
       state.error = null;
       state.added = false;
+    },
+    resetAllQuestions: (state, action) => {
+      state.allQuestions = [];
+      state.loading = false;
+      state.error = null;
     },
   },
   extraReducers: {
@@ -59,6 +64,7 @@ export const {
   getAllQuestionsRejected,
   getAllQuestionsSuccess,
   addQuestionFinished,
+  resetAllQuestions,
 } = allQuestionsSlice.actions;
 
 export default allQuestionsSlice.reducer;

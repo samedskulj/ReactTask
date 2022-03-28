@@ -18,10 +18,12 @@ initializeApp(firebaseConfig);
 const firebaseDatabase = getFirestore();
 const questionsCollections = collection(firebaseDatabase, "questions");
 const usersCollections = collection(firebaseDatabase, "users");
+const reactionCollections = collection(firebaseDatabase, "reactions");
 const authFirebase = getAuth();
 export {
   firebaseDatabase,
   authFirebase,
   questionsCollections,
   usersCollections,
+  reactionCollections,
 };

@@ -28,7 +28,7 @@ const TopUsers = () => {
         <ModalQuestion show={show} setShow={setShow} />
         <div className="top-users__section">
           <h2>Top Users</h2>
-          {users?.map((user) => (
+          {topUsers?.map((user) => (
             <UsersList key={user.id} user={user} />
           ))}
         </div>

@@ -3,6 +3,8 @@ import {
   addComment,
   editComment,
   deleteComment,
+  addLikes,
+  addDislikes,
 } from "../../utils/firebase-functions/firebase-functions";
 
 export const addAnswerFirebase = createAsyncThunk(
@@ -29,6 +31,22 @@ export const deleteAnswerFirebase = createAsyncThunk(
   }
 );
 
+export const addLikesFirebase = createAsyncThunk(
+  "singleQuestion/addLikesFirebase",
+  async (formData) => {
+    const response = await addLikes(formData);
+    return response;
+  }
+);
+
+export const addDislikesFirebase = createAsyncThunk(
+  "singleQuestion/addDislikesFirebase",
+  async (formData) => {
+    const response = await addDislikes(formData);
+    return response;
+  }
+);
+
 export const singleQuestionSlice = createSlice({
   name: "singleQuestion",
   initialState: {
@@ -38,6 +56,7 @@ export const singleQuestionSlice = createSlice({
     error: null,
     updated: null,
     deleted: null,
+    reaction: null,
   },
   reducers: {
     getSingleQuestionFetch: (state) => {
@@ -72,6 +91,34 @@ export const singleQuestionSlice = createSlice({
     },
   },
   extraReducers: {
+    [addLikesFirebase.pending]: (state, action) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [addLikesFirebase.fulfilled]: (state, action) => {
+      state.loading = true;
+      state.reaction = action.payload;
+      state.error = null;
+    },
+    [addLikesFirebase.rejected]: (state, action) => {
+      state.loading = true;
+      state.reaction = null;
+      state.error = action.payload;
+    },
+    [addDislikesFirebase.pending]: (state, action) => {
+      state.loading = true;
+      state.error = null;
+    },
+    [addDislikesFirebase.fulfilled]: (state, action) => {
+      state.loading = true;
+      state.reaction = action.payload;
+      state.error = null;
+    },
+    [addDislikesFirebase.rejected]: (state, action) => {
+      state.loading = true;
+      state.reaction = null;
+      state.error = action.payload;
+    },
     [addAnswerFirebase.pending]: (state, action) => {
       state.loading = true;
       state.error = null;
