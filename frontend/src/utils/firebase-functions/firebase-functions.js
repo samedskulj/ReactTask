@@ -333,9 +333,7 @@ export const resetPassword = async (formData) => {
 
 export const signOutUser = async () => {
   try {
-    signOut(authFirebase).then(() => {
-      console.log("radi");
-    });
+    signOut(authFirebase).then(() => {});
   } catch (error) {
     return error.message;
   }
