@@ -9,7 +9,6 @@ const Layout = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(authFirebase);
     onAuthStateChanged(authFirebase, (user) => {
       if (user) {
         dispatch(getUser(user.email));

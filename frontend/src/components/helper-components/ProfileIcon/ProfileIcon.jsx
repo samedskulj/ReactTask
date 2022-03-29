@@ -14,11 +14,13 @@ const ProfileIcon = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user.user);
   const navigate = useNavigate();
+
   const handleSignOut = () => {
     dispatch(signOutUserFirebase());
     dispatch(resetUserData());
-    navigate("/login");
+    navigate("/");
   };
+
   return (
     <>
       <div
