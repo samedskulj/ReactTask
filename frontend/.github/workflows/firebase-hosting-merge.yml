@@ -18,4 +18,3 @@ jobs:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_REACTTASK_20C61 }}"
           channelId: live
           projectId: reacttask-20c61
-          path: frontend
