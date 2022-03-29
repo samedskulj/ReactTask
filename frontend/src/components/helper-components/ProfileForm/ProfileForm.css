@@ -1,0 +1,7 @@
+@media only screen and (max-width: 992px) {
+  #account-settings {
+    margin: 2rem 0;
+    text-align: center;
+    width: 100%;
+  }
+}

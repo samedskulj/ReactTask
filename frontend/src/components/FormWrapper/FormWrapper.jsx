@@ -17,6 +17,9 @@ const FormWrapper = ({
         <div className="form-link-group">
           <p>{subheading}</p>
           <Link to={linkType}>{linkText}</Link>
+          <Link className="ml-5" to="/">
+            Go Home
+          </Link>
         </div>
         <AccessForm formType={typeOfForm} />
       </div>

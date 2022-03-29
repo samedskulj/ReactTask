@@ -9,7 +9,7 @@ import Comments from "./Comments/Comments";
 import RealTimeQuestions from "./RealTimeQuestions/RealTimeQuestions";
 import ProfileSection from "./ProfileSection/ProfileSection";
 import RealtimeAnswersQuestion from "./RealtimeAnswersQuestion/RealtimeAnswersQuestion";
-
+import ResetPasswordSection from "../pages/ResetPassword/ResetPassword";
 export {
   Navbar,
   Tabs,
@@ -22,4 +22,5 @@ export {
   RealTimeQuestions,
   ProfileSection,
   RealtimeAnswersQuestion,
+  ResetPasswordSection,
 };

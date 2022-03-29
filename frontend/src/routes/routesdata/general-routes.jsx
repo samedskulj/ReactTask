@@ -6,6 +6,7 @@ import {
   Register,
   Login,
 } from "../../pages";
+import ResetPassword from "../../pages/ResetPassword/ResetPassword";
 
 export const generalRoutes = [
   {
@@ -19,6 +20,7 @@ export const generalRoutes = [
     exact: true,
     component: <MyQuestions />,
     layout: true,
+    auth: true,
   },
   {
     path: "/question/:id",
@@ -31,11 +33,19 @@ export const generalRoutes = [
     exact: true,
     component: <Profile />,
     layout: true,
+    auth: true,
   },
   {
     path: "/register",
     exact: true,
     component: <Register />,
+  },
+  {
+    path: "/resetpassword",
+    exact: true,
+    component: <ResetPassword />,
+    layout: true,
+    auth: true,
   },
   {
     path: "/login",

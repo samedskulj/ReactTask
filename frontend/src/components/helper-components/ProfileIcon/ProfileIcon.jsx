@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DefaultIMG } from "../../../images";
 import MultiButton from "../Button/MultiButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,13 +13,11 @@ const ProfileIcon = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user.user);
-
+  const navigate = useNavigate();
   const handleSignOut = () => {
     dispatch(signOutUserFirebase());
     dispatch(resetUserData());
-    if (user.length === 0) {
-      window.locatio.reload();
-    }
+    navigate("/login");
   };
   return (
     <>

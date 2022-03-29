@@ -45,15 +45,6 @@ const AnswersModal = ({ show, setShow, commentId }) => {
     setShow(false);
   };
 
-  const dispatchDeleteComment = () => {
-    const data = {
-      answer: formData.answer,
-      id: singleQuestion.id,
-      commentId: getSingleQuestion[0].id,
-    };
-    dispatch(deleteAnswerFirebase(data));
-  };
-
   const { errors, formData, handleChange, handleSubmit, clearData } =
     useFormValidation("answer", initialObject, dispatchEditComment);
 

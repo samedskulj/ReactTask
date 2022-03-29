@@ -34,9 +34,11 @@ const Form = ({ formType }) => {
       if (user.error.includes("auth/email")) {
         setErrorFirebase("Email already in use");
         dispatch(resetUserData());
+        return;
       } else if (user.error.includes("auth/user-not-found")) {
         setErrorFirebase("Password or email incorrect");
         dispatch(resetUserData());
+        return;
       } else {
         setErrorFirebase(null);
         navigate("/");

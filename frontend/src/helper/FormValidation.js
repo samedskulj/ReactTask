@@ -64,6 +64,25 @@ export const formValidation = (formData, formType) => {
       if (!formData.answer) {
         errors.answer = "Your answer can't be empty";
       }
+
+    case "resetPassword":
+      if (!formData.password) {
+        errors.password = "Type your new password. This should not be empty!";
+      }
+      if (!formData.oldPassword) {
+        errors.oldPassword = "Type your old password";
+      }
+      if (!formData.newPassword) {
+        errors.newPassword = "Confirm password field should not be empty";
+      } else if (formData.newPassword.length < 6) {
+        errors.newPassword = "Password should be at least 6 characters";
+      } else if (
+        !formData.newPassword ||
+        formData.password !== formData.newPassword
+      ) {
+        errors.newPassword = "Passwords do not match";
+      }
+      break;
   }
 
   return errors;

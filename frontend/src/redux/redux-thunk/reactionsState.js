@@ -1,30 +1,41 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getReactions } from "../../utils/firebase-functions/firebase-functions";
 
-export const reactionsSlice = createSlice({
-  name: "reactionsSlice",
+export const getReactionsFirebase = createAsyncThunk(
+  "reactions/getReactionsFirebase",
+  async (formData) => {
+    const response = await getReactions();
+    return response;
+  }
+);
+
+export const reactionsState = createSlice({
+  name: "reactions",
   initialState: {
     reactions: [],
     loading: false,
     error: null,
   },
-  reducers: {
-    getReactionsFetch: (state) => {
+  extraReducers: {
+    [getReactionsFirebase.pending]: (state, action) => {
       state.loading = true;
       state.error = null;
     },
-    getReactionsSuccess: (state, action) => {
-      state.reactions = action.payload;
-      state.loading = false;
+    [getReactionsFirebase.fulfilled]: (state, action) => {
+      state.loading = true;
+      state.reaction = action.payload;
       state.error = null;
     },
-    getReactionsRejected: (state, action) => {
-      state.loading = false;
+    [getReactionsFirebase.rejected]: (state, action) => {
+      state.loading = true;
+      state.reaction = null;
       state.error = action.payload;
+    },
+    [getReactionsFirebase.pending]: (state, action) => {
+      state.loading = true;
+      state.error = null;
     },
   },
 });
 
-export const { getReactionsFetch, getReactionsSuccess, getReactionsRejected } =
-  reactionsSlice.actions;
-
-export default reactionsSlice.reducer;
+export default reactionsState.reducer;

@@ -8,6 +8,7 @@ import { convertArray } from "../../../helper/convertArray";
 import useFormValidation from "../../../hooks/useFormValidation";
 import { updateUserFirebase } from "../../../redux/redux-thunk/userState";
 import { useDispatch } from "react-redux";
+import "./ProfileForm.css";
 
 const ProfileForm = ({ user }) => {
   const object = convertArray(user);
@@ -44,7 +45,7 @@ const ProfileForm = ({ user }) => {
     <>
       {user !== null && (
         <Col lg="8">
-          <h2>Account Settings</h2>
+          <h2 id="account-settings">Account Settings</h2>
           <form onSubmit={handleUpdate}>
             {inputs.map((input) => (
               <Col lg="12" key={input.id}>

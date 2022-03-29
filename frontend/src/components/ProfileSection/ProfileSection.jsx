@@ -25,7 +25,7 @@ const ProfileSection = () => {
 
   return (
     <>
-      {user.user == null ? (
+      {user.user === null ? (
         <Loader />
       ) : (
         <Container className="py-5">

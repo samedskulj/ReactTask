@@ -6,7 +6,6 @@ import {
   getDocs,
   query,
   where,
-  getDoc,
   doc,
   updateDoc,
   setDoc,
@@ -16,8 +15,11 @@ import {
 } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
   signInWithEmailAndPassword,
   updatePassword,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 import {
@@ -25,10 +27,8 @@ import {
   authFirebase,
   questionsCollections,
   usersCollections,
+  reactionCollections,
 } from "../firebase-config";
-import { async } from "@firebase/util";
-
-const currentUser = authFirebase.currentUser;
 
 //One place for all of the firebase functions
 
@@ -105,10 +105,11 @@ export const addQuestion = async (formData) => {
   }
 };
 //getHot is a function that gets the hot questions from the database using the orderBy function, and query from the Firestore (firebase npm package)
+//Since I did not have a time to finish the likes and dislikes functionality, I implemented hot questions with numberOfComments field to show that this method does work only for comments, not likes
 export const getHot = async () => {
   const q = query(
     questionsCollections,
-    orderBy("numberOfLikes", "desc"),
+    orderBy("numberOfComments", "desc"),
     limit(10)
   );
   const docSnap = await getDocs(q);
@@ -177,7 +178,7 @@ export const addComment = async (formData) => {
     const document = doc(questionsCollections, formData.id);
 
     await updateDoc(document, {
-      numberOfComments: increment(-1),
+      numberOfComments: increment(1),
     });
 
     await updateDoc(updatedUserDocument, {
@@ -248,6 +249,9 @@ export const getUsersQuestions = async (userId) => {
 };
 
 //Add like and dislike functionality
+//DISCLAIMER: This functionality does work. It inputs the user and the post in collection called reactions
+//Lack of time to implement it on frontend side to show correct way of liking and disliking, so that is why the buttons have been deleted in frontend side for like and dislike
+//P.S: On my Github account I have app "SamkeChat" where I implemented the liking and disliking functionality
 
 export const addLikes = async (formData) => {
   const { postId, userId, status } = formData;
@@ -260,16 +264,16 @@ export const addLikes = async (formData) => {
           status: 1,
         }
       );
-      const document = doc(questionsCollections, formData.id);
+      const document = doc(questionsCollections, formData.postId);
 
       await updateDoc(document, {
-        numberOfComments: increment(1),
+        numberOfLikes: increment(1),
       });
     } else if (status === undefined) {
       const success = await deleteDoc(
         doc(firebaseDatabase, "reactions", `${postId}:${userId}`)
       );
-      const document = doc(questionsCollections, formData.id);
+      const document = doc(questionsCollections, formData.postId);
 
       await updateDoc(document, {
         numberOfLikes: increment(-1),
@@ -312,8 +316,14 @@ export const addDislikes = async (formData) => {
 };
 
 export const resetPassword = async (formData) => {
-  const { password } = formData;
+  const { password, email, oldPassword } = formData;
   try {
+    const credentials = EmailAuthProvider.credential(
+      authFirebase.currentUser.email,
+      oldPassword
+    );
+
+    await reauthenticateWithCredential(authFirebase.currentUser, credentials);
     const response = await updatePassword(authFirebase.currentUser, password);
     return response;
   } catch (error) {
@@ -321,11 +331,19 @@ export const resetPassword = async (formData) => {
   }
 };
 
-export const signOut = async () => {
+export const signOutUser = async () => {
   try {
-    const response = await signOut(authFirebase);
-    return response;
+    signOut(authFirebase).then(() => {
+      console.log("radi");
+    });
   } catch (error) {
     return error.message;
   }
+};
+
+export const getReactions = async () => {
+  try {
+    const response = await collection(reactionCollections);
+    return response;
+  } catch (error) {}
 };

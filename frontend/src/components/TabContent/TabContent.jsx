@@ -9,6 +9,7 @@ import "./TabContent.css";
 const TabContent = ({ tabCategory }) => {
   const allQuestions = useSelector((state) => state.allQuestions.allQuestions);
   const hotQuestions = useSelector((state) => state.hotQuestions.hotQuestions);
+
   return (
     <>
       {hotQuestions.length === 0 && allQuestions.length === 0 && <Loader />}

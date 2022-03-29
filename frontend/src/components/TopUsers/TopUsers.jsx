@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { MultiButton, UsersList } from "../helper-components";
-import { topusers } from "../../data/topusers";
 import { Col } from "react-bootstrap";
 import "./TopUsers.css";
 import ModalQuestion from "../ModalQuestion/ModalQuestion";
 import { useDispatch, useSelector } from "react-redux";
 import { getTopUsersFirebase } from "../../redux/redux-thunk/topUsersState";
+import AuthorizedComponent from "../../helper/AuthorizedComponent";
 
 const TopUsers = () => {
-  const [users, setUsers] = useState(topusers);
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
 
@@ -22,9 +21,13 @@ const TopUsers = () => {
   return (
     <Col lg="3">
       <div className="top-users">
-        <MultiButton roleClass={"add-question"} clickFunction={handleShow}>
-          Ask a Question
-        </MultiButton>
+        <AuthorizedComponent>
+          <div className="top-users__add">
+            <MultiButton roleClass={"add-question"} clickFunction={handleShow}>
+              Ask a Question
+            </MultiButton>
+          </div>
+        </AuthorizedComponent>
         <ModalQuestion show={show} setShow={setShow} />
         <div className="top-users__section">
           <h2>Top Users</h2>

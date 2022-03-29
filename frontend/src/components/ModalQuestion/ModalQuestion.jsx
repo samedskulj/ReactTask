@@ -39,32 +39,30 @@ const ModalQuestion = ({ show, setShow }) => {
   };
 
   return (
-    <div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Ask a Question</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {inputs?.map((question) => {
-            return (
-              <Inputs
-                key={question.id}
-                {...question}
-                value={formData[question.name]}
-                handleChange={handleChange}
-                error={errors[question.name]}
-              />
-            );
-          })}
-        </Modal.Body>
-        <Modal.Footer>
-          {errors.credentials && <span>{errors.credentials}</span>}
-          <MultiButton roleClass="ask-question" clickFunction={handleSubmit}>
-            Submit a Question
-          </MultiButton>
-        </Modal.Footer>
-      </Modal>
-    </div>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Ask a Question</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {inputs?.map((question) => {
+          return (
+            <Inputs
+              key={question.id}
+              {...question}
+              value={formData[question.name]}
+              handleChange={handleChange}
+              error={errors[question.name]}
+            />
+          );
+        })}
+      </Modal.Body>
+      <Modal.Footer>
+        {errors.credentials && <span>{errors.credentials}</span>}
+        <MultiButton roleClass="ask-question" clickFunction={handleSubmit}>
+          Submit a Question
+        </MultiButton>
+      </Modal.Footer>
+    </Modal>
   );
 };
 

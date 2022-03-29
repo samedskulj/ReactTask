@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AiOutlineArrowUp,
   AiOutlineArrowDown,
@@ -8,51 +8,50 @@ import { Link } from "react-router-dom";
 import { DefaultIMG } from "../../../images";
 import "./Card.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getReactionsSuccess } from "../../../redux/redux-thunk/reactionsState";
-import { reactionCollections } from "../../../utils/firebase-config";
-import { collection, onSnapshot } from "firebase/firestore";
-import { commentTextArea } from "../../../data/inputs";
-import { addLikes } from "../../../utils/firebase-functions/firebase-functions";
+import {
+  addLikesFirebase,
+  addDislikesFirebase,
+} from "../../../redux/redux-thunk/singleQuestionState";
 
 const Card = ({ content }) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [className, setClassname] = useState("");
+  const [status, setStatus] = useState();
   const { reactions } = useSelector((state) => state.reactions);
-  useEffect(() => {
-    const unsubscribe = onSnapshot(reactionCollections, (snapshot) => {
-      dispatch(
-        getReactionsSuccess(
-          snapshot.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }))
-        )
-      );
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const { allQuestions } = useSelector((state) => state.allQuestions);
+  const { singleQuestion } = useSelector((state) => state.singleQuestion);
 
+  //Showing the way to like
   const dispatchLikes = () => {
     const data = {
       userId: user[0].id,
       postId: content.id,
       status: 1,
     };
-
-    dispatch(addLikes(data));
+    dispatch(addLikesFirebase(data));
+  };
+  //Showing the way to dislike
+  const dispatchDislikes = () => {
+    const data = {
+      userId: user[0].id,
+      postId: content.id,
+      status: -1,
+    };
+    dispatch(addDislikesFirebase(data));
   };
 
   return (
     <>
-      <Link to={`/question/${content.id}`} className="card-grid__link">
-        <div className="card-grid">
-          <div className="card-grid__thumbs">
-            <AiOutlineArrowUp onClick={dispatchLikes} id="card-grid__like" />
-            <p>{content.numberOfLikes}</p>
-            <AiOutlineArrowDown />
-          </div>
+      <div className="card-grid">
+        {/* <div className="card-grid__thumbs">
+          <AiOutlineArrowUp
+            onClick={dispatchLikes}
+          />
+          <p>{content.numberOfLikes}</p>
+          <AiOutlineArrowDown onClick={dispatchDislikes} />
+        </div> */}
+        <Link to={`/question/${content.id}`} className="card-grid__link">
           <div className="card-grid__main">
             <h2>{content.title}</h2>
             <p>{content.question}</p>
@@ -67,8 +66,8 @@ const Card = ({ content }) => {
               </div>
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </>
   );
 };

@@ -45,3 +45,9 @@
 .ask-question:hover {
   background-color: var(--blue-secondary-clr-dark);
 }
+
+@media only screen and (max-width: 992px) {
+  .btn-form {
+    margin-top: 2rem;
+  }
+}

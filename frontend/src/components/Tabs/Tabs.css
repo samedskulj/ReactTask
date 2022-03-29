@@ -33,3 +33,10 @@
   height: 100%;
   background-color: var(--blue-primary-clr);
 }
+
+@media only screen and (max-width: 992px) {
+  .category-tab-list {
+    flex-direction: row;
+    margin-bottom: 2rem;
+  }
+}

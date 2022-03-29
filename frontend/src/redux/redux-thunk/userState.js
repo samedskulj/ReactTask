@@ -4,7 +4,7 @@ import {
   changeProfileData,
   registerUser,
   loginUser,
-  signOut,
+  signOutUser,
   resetPassword,
 } from "../../utils/firebase-functions/firebase-functions";
 
@@ -47,8 +47,8 @@ export const resetPasswordFirebase = createAsyncThunk(
 
 export const signOutUserFirebase = createAsyncThunk(
   "user/signOutUserFirebase",
-  async (formData) => {
-    const response = await signOut(formData);
+  async () => {
+    const response = await signOutUser();
     return response;
   }
 );
@@ -61,7 +61,7 @@ export const userSlice = createSlice({
     loading: false,
     updated: false,
     signout: false,
-    resetpassword: false,
+    resetpassword: null,
   },
   reducers: {
     resetUserData: (state) => {
@@ -69,6 +69,7 @@ export const userSlice = createSlice({
       state.error = false;
       state.loading = false;
       state.updated = false;
+      state.signout = false;
     },
   },
   extraReducers: {
@@ -80,6 +81,7 @@ export const userSlice = createSlice({
       state.user = action.payload;
       state.loading = false;
       state.error = null;
+      state.resetpassword = null;
     },
     [getUser.rejected]: (state, action) => {
       state.loading = false;
@@ -101,6 +103,7 @@ export const userSlice = createSlice({
     [resetPasswordFirebase.pending]: (state, action) => {
       state.loading = true;
       state.error = null;
+      state.resetpassword = null;
     },
     [resetPasswordFirebase.fulfilled]: (state, action) => {
       state.loading = false;
@@ -111,7 +114,6 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-
     [updateUserFirebase.pending]: (state, action) => {
       state.loading = true;
       state.error = null;
@@ -153,8 +155,9 @@ export const userSlice = createSlice({
     },
     [loginUserFirebase.fulfilled]: (state, action) => {
       if (
-        typeof action.payload === "string" &&
-        action.payload.includes("auth/user-not-found")
+        (typeof action.payload === "string" &&
+          action.payload.includes("auth/user-not-found")) ||
+        action.payload.includes("(auth/wrong-password)")
       ) {
         state.error = action.payload;
         state.user = null;

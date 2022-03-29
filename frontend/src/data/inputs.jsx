@@ -93,3 +93,19 @@ export const editAnswer = {
   name: "answer",
   type: "textarea",
 };
+
+export const resetpassword = [
+  { id: 1, name: "oldPassword", type: "password", label: "Old password" },
+  {
+    id: 2,
+    name: "password",
+    type: "password",
+    label: "New password",
+  },
+  {
+    id: 3,
+    name: "newPassword",
+    type: "password",
+    label: "Confirm password",
+  },
+];
