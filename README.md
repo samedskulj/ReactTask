@@ -1,2 +1,2 @@
 # ReactTask
-React task for frontend developer
+React task for Frontend Developer
